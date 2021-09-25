@@ -13,7 +13,7 @@ public class PlacementScript : MonoBehaviour
     public GameObject Castle { get; private set; }
     public Vector3 firstLocation;
     public GameObject gameEngine;
-
+    public GameObject weapon;
     private GameObject placementIndicator;
     private ARRaycastManager arRaycastManager;
     private Pose placementPose;
@@ -48,6 +48,15 @@ public class PlacementScript : MonoBehaviour
                 firstLocation = placementPose.position;
                 Castle = Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
                 enemySpawner.SpawnEnemies(placementPose.position);
+
+                Destroy(placementIndicator);
+                placementIndicator = null;
+                Instantiate(weapon);
+                Debug.Log("disable");
+                ARPlaneManager arpm = GetComponent<ARPlaneManager>();
+                arpm.planePrefab = null;
+                arpm.SetTrackablesActive(false);
+                enabled = false;
             }
         }
         else

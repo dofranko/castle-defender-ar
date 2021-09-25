@@ -46,16 +46,15 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-
+        Destroy(gameObject);
     }
     public void TakeDamage(int damage)
     {
         int health = healthBar.GetHealth();
         if (damage - stats.Defense < 1) damage = 1;
         health -= damage;
-        if (health < 0) health = 0;
+        if (health <= 0) Die();
         healthBar.SetHealth(health);
-        Die();
     }
     void Update()
     {

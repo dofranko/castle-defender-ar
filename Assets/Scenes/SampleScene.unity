@@ -200,6 +200,7 @@ MonoBehaviour:
   placementIndicatorPrefab: {fileID: 5513277538871564842, guid: f3989798d307dee4fbc68182d4696f60, type: 3}
   firstLocation: {x: 0, y: 0, z: 0}
   gameEngine: {fileID: 1622136015}
+  weapon: {fileID: 380814551001927801, guid: 406353dbfec31ff47ba3d569fda14126, type: 3}
 --- !u!114 &40919619
 MonoBehaviour:
   m_ObjectHideFlags: 0

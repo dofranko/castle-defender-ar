@@ -12,7 +12,7 @@ public class HealthBar : MonoBehaviour
         slider.maxValue = max;
         slider.value = max;
 
-        gradient.Evaluate(1f);
+        gradient.Evaluate(slider.normalizedValue);
     }
     public void SetHealth(int health)
     {
