@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponScript : MonoBehaviour
+public class WeaponRaycastScript : MonoBehaviour
 {
 
     private Camera cam;
@@ -11,7 +11,6 @@ public class WeaponScript : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        Debug.Log("weapon started");
     }
 
     void Update()

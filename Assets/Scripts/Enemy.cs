@@ -12,14 +12,17 @@ public class Enemy : MonoBehaviour
         Moving,
         StoppedMoving,
         Dead,
-        WaitingForCastle
+        WaitingForCastle,
+        Shooting
     }
 
     public Vector3 CastlePosition { get; set; }
     public HealthBar healthBar;
-
+    public WeaponPrefabScript weapon;
     private readonly CharacterStatistics stats = new CharacterStatistics(20, 3, 2, 0.3f, 1.5f, 0.85f);
     private State state = State.None;
+    private float FireSpeed = 0.5f;
+    private float nextTimeToFire = 0.0f;
 
     void Awake()
     {
@@ -59,22 +62,29 @@ public class Enemy : MonoBehaviour
     void Update()
     {
 
-        if (state == State.Moving)
+        switch (state)
         {
-            transform.LookAt(CastlePosition);
-            if (Vector3.Distance(transform.position, CastlePosition) >= 1.0f)
-            {
-
-                transform.position += transform.forward * stats.Speed * Time.deltaTime;
-
-
-
-                if (Vector3.Distance(transform.position, CastlePosition) <= 1.5f)
+            case State.Moving:
+                transform.LookAt(CastlePosition);
+                if (Vector3.Distance(transform.position, CastlePosition) >= 1.0f)
                 {
-                    //Here Call any function U want Like Shoot at here or something
-                }
+                    transform.position += transform.forward * stats.Speed * Time.deltaTime;
+                    if (Vector3.Distance(transform.position, CastlePosition) <= 1.5f)
+                    {
+                        state = State.Shooting;
+                    }
 
-            }
+                }
+                break;
+            case State.Shooting:
+                if (Time.time >= nextTimeToFire)
+                {
+                    Debug.Log("trying to shoot");
+                    nextTimeToFire = Time.time + 1f / FireSpeed;
+                    weapon.Shoot();
+                    Debug.Log("Finished shooting");
+                }
+                break;
         }
     }
 }

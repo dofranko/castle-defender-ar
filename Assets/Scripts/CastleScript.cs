@@ -10,4 +10,17 @@ public class CastleScript : MonoBehaviour
     {
         healthBar.SetMaxHealth(100);
     }
+    public void TakeDamage(int damage)
+    {
+        Debug.Log("taking dmg");
+        int health = healthBar.GetHealth();
+        health -= damage;
+        if (health <= 0) Die();
+        healthBar.SetHealth(health);
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
+    }
 }
