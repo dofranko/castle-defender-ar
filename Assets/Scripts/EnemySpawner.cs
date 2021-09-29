@@ -7,16 +7,31 @@ public class EnemySpawner : MonoBehaviour
     enum State
     {
         NotSpawned,
-        Spawned
+        Spawned,
+        InBetweenWaves
     }
-
+    private float timeRemaining = 0;
     private State state = State.NotSpawned;
     public GameObject enemyPrefab;
 
-    public void SpawnEnemies(Vector3 castleLocation)
+    private CastleScript castleScript;
+
+    void Start()
+    {
+        var placementScript = GetComponent<PlacementScript>();
+        placementScript.OnCastleSpawn += OnCastleSpawn;
+    }
+
+    private void SpawnEnemies()
+    {
+        StartCoroutine(SpawnEnemiesEnumerator());
+    }
+    private IEnumerator SpawnEnemiesEnumerator()
     {
         if (state == State.Spawned)
-            return;
+            yield return new WaitForSeconds(0.0f);
+        yield return new WaitForSeconds(3.0f);
+        var castleLocation = GetCastle().transform.position;
         for (int i = 0; i < 5; i++)
         {
             Vector3 newLocation = new Vector3(
@@ -24,26 +39,68 @@ public class EnemySpawner : MonoBehaviour
                 castleLocation.y,
                 castleLocation.z - Random.Range(2, 10) * (Random.Range(0, 1) * 2 - 1));
             var enemy = Instantiate(enemyPrefab, newLocation, new Quaternion());
-            enemy.GetComponent<Enemy>().CastlePosition = castleLocation;
+            var enemyEnemyComp = enemy.GetComponent<Enemy>();
+            enemyEnemyComp.CastlePosition = castleLocation;
+            enemyEnemyComp.OnDie += OnEnemyDie;
         }
         state = State.Spawned;
 
     }
+
     void Update()
     {
+        if (state == State.InBetweenWaves)
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                float minutes = Mathf.FloorToInt(timeRemaining / 60);
+                float seconds = Mathf.FloorToInt(timeRemaining % 60);
+                var text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            }
+            else
+            {
+                timeRemaining = 0;
+                state = State.NotSpawned;
+                GetCastle().HideUpgrades();
+                SpawnEnemies();
+            }
+
+        }
+    }
+
+    private void OnEnemyDie(object? sender, System.EventArgs e)
+    {
+        StartCoroutine(CheckInBetweenWaves());
+    }
+
+    private void OnCastleSpawn(object? sender, System.EventArgs e)
+    {
+        SpawnEnemies();
+    }
+
+    private IEnumerator CheckInBetweenWaves()
+    {
+        yield return new WaitForSeconds(1.0f);
+        GetCastle();
         if (state == State.Spawned)
         {
-            var a = Object.FindObjectsOfType<Enemy>();
-            if (a.Length == 0)
+            var allEnemies = FindObjectsOfType<Enemy>();
+            if (allEnemies.Length == 0)
             {
-                var b = Object.FindObjectOfType<CastleScript>();
-                if (b)
-                {
-                    b.DisplayUpgrades();
-                    state = State.NotSpawned;
-                }
+                castleScript.DisplayUpgrades();
+                timeRemaining = 60;
+                state = State.InBetweenWaves;
             }
         }
     }
 
+    private CastleScript GetCastle()
+    {
+        if (!castleScript)
+        {
+            castleScript = FindObjectOfType<CastleScript>();
+        }
+        return castleScript;
+    }
 }

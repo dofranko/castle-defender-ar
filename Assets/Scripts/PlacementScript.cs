@@ -8,12 +8,13 @@ using UnityEngine.XR.ARSubsystems;
 public class PlacementScript : MonoBehaviour
 {
 
-    public GameObject objectToPlace;
+    public GameObject castleToPlace;
     public GameObject placementIndicatorPrefab;
-    public GameObject Castle { get; private set; }
-    public Vector3 firstLocation;
-    public GameObject gameEngine;
+    public GameObject playerUI;
     public GameObject weapon;
+
+    public event System.EventHandler OnCastleSpawn;
+
     private GameObject placementIndicator;
     private ARRaycastManager arRaycastManager;
     private Pose placementPose;
@@ -21,7 +22,7 @@ public class PlacementScript : MonoBehaviour
     void Awake()
     {
         arRaycastManager = GetComponent<ARRaycastManager>();
-        enemySpawner = gameEngine.GetComponent<EnemySpawner>();
+
     }
 
     void Start()
@@ -45,16 +46,19 @@ public class PlacementScript : MonoBehaviour
             placementIndicator.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                firstLocation = placementPose.position;
-                Castle = Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
-                enemySpawner.SpawnEnemies(placementPose.position);
+                Instantiate(castleToPlace, placementPose.position, placementPose.rotation);
+                OnCastleSpawn?.Invoke(this, System.EventArgs.Empty);
 
                 Destroy(placementIndicator);
                 placementIndicator = null;
                 Instantiate(weapon);
+
                 ARPlaneManager arpm = GetComponent<ARPlaneManager>();
                 arpm.planePrefab = null;
                 arpm.SetTrackablesActive(false);
+
+                playerUI.SetActive(true);
+
                 enabled = false;
             }
         }

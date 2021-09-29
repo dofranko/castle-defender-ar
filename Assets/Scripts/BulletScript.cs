@@ -23,7 +23,7 @@ public class BulletScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        CastleScript castle = other.GetComponent<CastleScript>();
+        var castle = other.GetComponent<CastleScript>();
         if (castle)
         {
             castle.TakeDamage(damage);

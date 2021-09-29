@@ -10,15 +10,15 @@ public class Enemy : MonoBehaviour
         None,
         Spawned,
         Moving,
-        StoppedMoving,
-        Dead,
-        WaitingForCastle,
         Shooting
     }
 
-    public Vector3 CastlePosition { get; set; }
+    public Vector3 CastlePosition { get; set; } = new Vector3();
     public HealthBar healthBar;
     public WeaponPrefabScript weapon;
+
+    public event System.EventHandler OnDie;
+
     private readonly CharacterStatistics stats = new CharacterStatistics(20, 3, 2, 0.3f, 1.5f, 0.85f);
     private State state = State.None;
     private float FireSpeed = 0.5f;
@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        OnDie?.Invoke(this, System.EventArgs.Empty);
         Destroy(gameObject);
     }
     public void TakeDamage(int damage)
@@ -61,7 +62,6 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
-
         switch (state)
         {
             case State.Moving:
@@ -73,7 +73,6 @@ public class Enemy : MonoBehaviour
                     {
                         state = State.Shooting;
                     }
-
                 }
                 break;
             case State.Shooting:

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 39900681460326787}
   - component: {fileID: 7661016213000125204}
   - component: {fileID: 290914579130155391}
+  - component: {fileID: 7106961851798547948}
   m_Layer: 9
   m_Name: ShieldImage
   m_TagString: Untagged
@@ -75,6 +76,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!65 &7106961851798547948
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745065510826042314}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8707639, y: 0.6733198, z: 0.001}
+  m_Center: {x: -0.0035899282, y: -0.005384922, z: 0}
 --- !u!1 &1101902265626814447
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,8 +176,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.86851263, y: 0.66397667, z: 0.024235189}
-  m_Center: {x: 0.002434954, y: -0.002434969, z: -0.0015530139}
+  m_Size: {x: 0.86851263, y: 0.66397667, z: 0.001}
+  m_Center: {x: 0.002434954, y: -0.002434969, z: 0}
 --- !u!1 &2334033853631746375
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,6 +189,7 @@ GameObject:
   - component: {fileID: 3827336861673057056}
   - component: {fileID: 8834352123529585806}
   - component: {fileID: 8143957618514152869}
+  - component: {fileID: 7429179087915295837}
   m_Layer: 9
   m_Name: MoneyImage
   m_TagString: Untagged
@@ -239,6 +254,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!65 &7429179087915295837
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334033853631746375}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8743539, y: 0.67332006, z: 0.001}
+  m_Center: {x: 0.008974791, y: -0.005384803, z: 0}
 --- !u!1 &3601349918251925495
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +278,7 @@ GameObject:
   - component: {fileID: 9006650316497631119}
   - component: {fileID: 4511071412560866735}
   - component: {fileID: 183340466596329663}
-  - component: {fileID: 8355325290405249806}
+  - component: {fileID: 7520123285325977739}
   m_Layer: 9
   m_Name: HealthImage
   m_TagString: Untagged
@@ -315,32 +343,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!61 &8355325290405249806
-BoxCollider2D:
+--- !u!65 &7520123285325977739
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3601349918251925495}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.00000011920929, y: -0.004201293}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8739624, y: 0.67230153}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.88153386, y: 0.68155897, z: 0.001}
+  m_Center: {x: 0.0017950535, y: -0.00591439, z: 0}
 --- !u!1 &4471508280538697815
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,8 +497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1219170573173347864}
-  - component: {fileID: 4892636543553000064}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: UpgradesPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,32 +527,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!61 &4892636543553000064
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4624549035514642329}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &8245986056085704512
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,7 +540,7 @@ GameObject:
   - component: {fileID: 1843847676499240155}
   - component: {fileID: 4098715691101432357}
   - component: {fileID: 1915751596717657489}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: UpgradesCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
