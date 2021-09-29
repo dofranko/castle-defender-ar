@@ -19,7 +19,6 @@ public class WeaponRaycastScript : MonoBehaviour
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, 10, LayerMask.NameToLayer("Shoot Ignore Raycast")))
             {
-                Debug.Log("trafiono" + hit.transform.name);
                 Enemy enemy = hit.transform.GetComponent<Enemy>();
                 if (enemy)
                 {

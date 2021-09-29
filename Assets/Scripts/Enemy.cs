@@ -79,10 +79,8 @@ public class Enemy : MonoBehaviour
             case State.Shooting:
                 if (Time.time >= nextTimeToFire)
                 {
-                    Debug.Log("trying to shoot");
                     nextTimeToFire = Time.time + 1f / FireSpeed;
                     weapon.Shoot();
-                    Debug.Log("Finished shooting");
                 }
                 break;
         }

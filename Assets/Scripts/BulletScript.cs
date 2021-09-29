@@ -23,14 +23,11 @@ public class BulletScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("hit object");
         CastleScript castle = other.GetComponent<CastleScript>();
         if (castle)
         {
-            Debug.Log("it s castle");
             castle.TakeDamage(damage);
         }
-        Debug.Log("destroing bullet");
         Destroy(gameObject);
     }
 }

@@ -5,14 +5,14 @@ using UnityEngine;
 public class CastleScript : MonoBehaviour
 {
     public HealthBar healthBar;
-
+    public GameObject upgradesPanel;
     void Start()
     {
-        healthBar.SetMaxHealth(100);
+        healthBar.SetMaxHealth(400);
+        upgradesPanel.SetActive(false);
     }
     public void TakeDamage(int damage)
     {
-        Debug.Log("taking dmg");
         int health = healthBar.GetHealth();
         health -= damage;
         if (health <= 0) Die();
@@ -22,5 +22,15 @@ public class CastleScript : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void DisplayUpgrades()
+    {
+        upgradesPanel.SetActive(true);
+    }
+
+    public void HideUpgrades()
+    {
+        upgradesPanel.SetActive(false);
     }
 }

@@ -10,7 +10,6 @@ public class WeaponPrefabScript : MonoBehaviour
     // Update is called once per frame
     public void Shoot()
     {
-        Debug.Log("instantiate bullet");
         var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
         Destroy(bullet, 5.0f);
     }

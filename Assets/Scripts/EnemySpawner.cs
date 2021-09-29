@@ -17,9 +17,8 @@ public class EnemySpawner : MonoBehaviour
     {
         if (state == State.Spawned)
             return;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 5; i++)
         {
-            Debug.Log(enemyPrefab);
             Vector3 newLocation = new Vector3(
                 castleLocation.x - Random.Range(2, 12) * (Random.Range(0, 1) * 2 - 1),
                 castleLocation.y,
@@ -30,4 +29,21 @@ public class EnemySpawner : MonoBehaviour
         state = State.Spawned;
 
     }
+    void Update()
+    {
+        if (state == State.Spawned)
+        {
+            var a = Object.FindObjectsOfType<Enemy>();
+            if (a.Length == 0)
+            {
+                var b = Object.FindObjectOfType<CastleScript>();
+                if (b)
+                {
+                    b.DisplayUpgrades();
+                    state = State.NotSpawned;
+                }
+            }
+        }
+    }
+
 }

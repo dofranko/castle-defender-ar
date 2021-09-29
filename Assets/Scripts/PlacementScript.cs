@@ -52,7 +52,6 @@ public class PlacementScript : MonoBehaviour
                 Destroy(placementIndicator);
                 placementIndicator = null;
                 Instantiate(weapon);
-                Debug.Log("disable");
                 ARPlaneManager arpm = GetComponent<ARPlaneManager>();
                 arpm.planePrefab = null;
                 arpm.SetTrackablesActive(false);
