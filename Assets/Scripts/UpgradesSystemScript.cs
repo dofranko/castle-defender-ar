@@ -7,14 +7,29 @@ public class UpgradesSystemScript : MonoBehaviour
 {
 
     public CastleScript castle;
-    [SerializeField]
-    private Text timerText;
+    [SerializeField] private Text timerText;
+    [SerializeField] private Text defenseText;
+    [SerializeField] private Text healthText;
+    [SerializeField] private Text shieldText;
+    [SerializeField] private Text moneyText;
+    [SerializeField] private TMPro.TMP_Text infoText;
+    [SerializeField] private Text moneyInfoText;
     private Camera cam;
     private int masksToFilter;
+
+    private void Awake()
+    {
+        castle.OnShowUpgrades += OnCastleShowUpgrades;
+    }
     void Start()
     {
         cam = Camera.main;
         masksToFilter = LayerMask.GetMask("Raycastable UI");
+    }
+    private void OnCastleShowUpgrades(object? sender, System.EventArgs e)
+    {
+        moneyInfoText.text = $"Money: {castle.Money}";
+        infoText.text = "Upgrade equipement or start new wave...";
     }
 
     void Update()
@@ -27,22 +42,53 @@ public class UpgradesSystemScript : MonoBehaviour
                 switch (hit.transform.name)
                 {
                     case "DefenseImage":
-                        castle.defense += 1;
-                        Debug.Log("upgraded defense");
+                        if (castle.Money < 20)
+                        {
+                            ShowNotEnoughMoney();
+                            break;
+                        }
+                        castle.UpgradeDefense(20); //TODO Parametrize
+                        defenseText.text = $"Lvl {castle.DefenseUpgradeLevel}";
+                        infoText.text = $"Upgraded defense from lvl {castle.DefenseUpgradeLevel - 1} to lvl {castle.DefenseUpgradeLevel}";
                         break;
                     case "HealthImage":
+                        if (castle.Money < 20)
+                        {
+                            ShowNotEnoughMoney();
+                            break;
+                        }
+                        castle.UpgradeHealth(20);
+                        healthText.text = $"Lvl {castle.HealthUpgradeLevel}";
+                        infoText.text = $"Upgraded health from lvl {castle.HealthUpgradeLevel - 1} to lvl {castle.HealthUpgradeLevel}\n";
+                        infoText.text += $"Health: {castle.GetHealth()}/{castle.GetMaxHealth()}";
                         break;
-                    // TODO
                     case "ShieldImage":
+                        if (castle.Money < 20)
+                        {
+                            ShowNotEnoughMoney();
+                            break;
+                        }
+                        castle.UpgradeShield(20);
+                        shieldText.text = $"Lvl {castle.ShieldUpgradeLevel}";
+                        infoText.text = $"Upgraded shield from lvl {castle.ShieldUpgradeLevel - 1} to lvl {castle.ShieldUpgradeLevel}\n";
+                        infoText.text += $"Shield: {castle.GetShield()}";
                         break;
-                    // TODO
                     case "MoneyImage":
+                        if (castle.Money < 20)
+                        {
+                            ShowNotEnoughMoney();
+                            break;
+                        }
+                        castle.UpgradeMoney(20);
+                        moneyText.text = $"Lvl {castle.MoneyUpgradeLevel}";
+                        infoText.text = $"Upgraded money bonus from lvl {castle.MoneyUpgradeLevel - 1} to lvl {castle.MoneyUpgradeLevel}\n";
+                        infoText.text += $"Money multiplier: {castle.GetMoneyMultiplier()}";
                         break;
-                    // TODO
                     case "SkipImage":
                         castle.HideUpgrades();
                         break;
                 }
+                moneyInfoText.text = $"Money: {castle.Money}";
             }
         }
     }
@@ -50,5 +96,10 @@ public class UpgradesSystemScript : MonoBehaviour
     public void SetTimerText(string text)
     {
         timerText.text = text;
+    }
+
+    private void ShowNotEnoughMoney()
+    {
+        infoText.text = "Not enough money to buy it";
     }
 }

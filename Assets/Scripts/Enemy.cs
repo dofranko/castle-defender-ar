@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     }
     void Start()
     {
-        healthBar.SetMaxHealth(stats.HealthMax);
+        healthBar.SetInitHealth(stats.HealthMax);
         Spawn();
     }
     public void Spawn()
@@ -51,6 +51,7 @@ public class Enemy : MonoBehaviour
     {
         OnDie?.Invoke(this, System.EventArgs.Empty);
         Destroy(gameObject);
+        //TODO on die give money
     }
     public void TakeDamage(int damage)
     {

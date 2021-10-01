@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 100
-  m_WholeNumbers: 1
+  m_WholeNumbers: 0
   m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
@@ -283,3 +283,4 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   fill: {fileID: 6336234269027949233}
+  smoothing: 5
