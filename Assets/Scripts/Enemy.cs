@@ -55,7 +55,8 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         int health = healthBar.GetHealth();
-        if (damage - stats.Defense < 1) damage = 1;
+        damage -= stats.Defense;
+        if (damage <= 0) damage = 1;
         health -= damage;
         if (health <= 0) Die();
         healthBar.SetHealth(health);
