@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public float speed;
-    public int damage = 2;
+    public int damage;
     public Rigidbody rb;
 
     // Update is called once per frame

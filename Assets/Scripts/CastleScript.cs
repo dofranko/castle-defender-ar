@@ -5,6 +5,7 @@ using UnityEngine;
 public class CastleScript : MonoBehaviour
 {
     public HealthBar healthBar;
+    public ShieldBarScript shieldBar;
     public GameObject upgradesPanel;
     public event System.EventHandler OnHideUpgrades;
     public event System.EventHandler OnDie;
@@ -16,17 +17,19 @@ public class CastleScript : MonoBehaviour
     public int MoneyUpgradeLevel { get; private set; } = 0;
     public int Money { get; private set; } = 200;
     private int defense = 5;
-    private int shield = 30; //zapewne zmaienione na to samo co health
     private float moneyMultiplier = 1.0f;
     void Start()
     {
         healthBar.SetInitHealth(200);
         upgradesPanel.SetActive(false);
+        shieldBar.SetInitShield(50);
     }
     public void TakeDamage(int damage)
     {
-        int health = healthBar.GetHealth();
+        damage = shieldBar.TakeDamage(damage);
+        if (damage == 0) return;
         damage -= defense;
+        int health = healthBar.GetHealth();
         if (damage <= 0) damage = 1;
         health -= damage;
         healthBar.SetHealth(health);
@@ -73,7 +76,7 @@ public class CastleScript : MonoBehaviour
     public void UpgradeShield(int moneyCost)
     {
         ShieldUpgradeLevel++;
-        shield += 10;
+        shieldBar.SetMaxShield(shieldBar.GetMaxShield() + 10);
         Money -= moneyCost;
     }
     public void UpgradeMoney(int moneyCost)
@@ -97,6 +100,6 @@ public class CastleScript : MonoBehaviour
     }
     public int GetShield()
     {
-        return shield;
+        return shieldBar.GetShield();
     }
 }

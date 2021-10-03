@@ -8,7 +8,7 @@ public class HealthBar : MonoBehaviour
     public Gradient gradient;
     public Image fill;
     private int health = 0;
-    [SerializeField] int smoothing;
+    [SerializeField] private int smoothing;
     private void Update()
     {
         if (slider.value != health)
@@ -38,7 +38,7 @@ public class HealthBar : MonoBehaviour
 
     public int GetHealth()
     {
-        return (int)health;
+        return health;
     }
     public int GetMaxHealth()
     {
