@@ -150,6 +150,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 7947238793505019010}
   weapon: {fileID: 1777888472747110905}
+  fireSpeed: 0.5
+  healthMax: 20
+  attack: 15
+  defense: 2
+  speed: 0.3
+  range: 1.5
+  accuracy: 0.85
+  money: 15
 --- !u!65 &1452287509906099472
 BoxCollider:
   m_ObjectHideFlags: 0

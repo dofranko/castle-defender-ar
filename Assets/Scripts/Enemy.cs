@@ -12,16 +12,26 @@ public class Enemy : MonoBehaviour
         Moving,
         Shooting
     }
-
+    public class EnemyDieEventArgs : System.EventArgs
+    {
+        public int Money { get; set; }
+    }
     public Vector3 CastlePosition { get; set; } = new Vector3();
     public HealthBar healthBar;
-    public WeaponPrefabScript weapon;
+    public WeaponPrefab weapon;
 
-    public event System.EventHandler OnDie;
+    public event System.EventHandler<EnemyDieEventArgs> OnDie;
 
-    private readonly CharacterStatistics stats = new CharacterStatistics(20, 3, 2, 0.3f, 1.5f, 0.85f);
+    [SerializeField] private float fireSpeed;
+    [SerializeField] private int healthMax;
+    [SerializeField] private int attack;
+    [SerializeField] private int defense;
+    [SerializeField] private float speed;
+    [SerializeField] private float range;
+    [SerializeField] private float accuracy;
+    [SerializeField] private int money;
+
     private State state = State.None;
-    private float FireSpeed = 0.5f;
     private float nextTimeToFire = 0.0f;
 
     void Awake()
@@ -29,7 +39,8 @@ public class Enemy : MonoBehaviour
     }
     void Start()
     {
-        healthBar.SetInitHealth(stats.HealthMax);
+        healthBar.SetInitHealth(healthMax);
+        weapon.SetDamage(attack);
         Spawn();
     }
     public void Spawn()
@@ -49,14 +60,14 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-        OnDie?.Invoke(this, System.EventArgs.Empty);
+        OnDie?.Invoke(this, new EnemyDieEventArgs() { Money = this.money });
         Destroy(gameObject);
         //TODO on die give money
     }
     public void TakeDamage(int damage)
     {
         int health = healthBar.GetHealth();
-        damage -= stats.Defense;
+        damage -= defense;
         if (damage <= 0) damage = 1;
         health -= damage;
         if (health <= 0) Die();
@@ -70,7 +81,7 @@ public class Enemy : MonoBehaviour
                 transform.LookAt(CastlePosition);
                 if (Vector3.Distance(transform.position, CastlePosition) >= 1.0f)
                 {
-                    transform.position += transform.forward * stats.Speed * Time.deltaTime;
+                    transform.position += transform.forward * speed * Time.deltaTime;
                     if (Vector3.Distance(transform.position, CastlePosition) <= 1.5f)
                     {
                         state = State.Shooting;
@@ -80,7 +91,7 @@ public class Enemy : MonoBehaviour
             case State.Shooting:
                 if (Time.time >= nextTimeToFire)
                 {
-                    nextTimeToFire = Time.time + 1f / FireSpeed;
+                    nextTimeToFire = Time.time + 1f / fireSpeed;
                     weapon.Shoot();
                 }
                 break;

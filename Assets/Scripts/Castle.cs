@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleScript : MonoBehaviour
+public class Castle : MonoBehaviour
 {
     public HealthBar healthBar;
-    public ShieldBarScript shieldBar;
+    public ShieldBar shieldBar;
     public GameObject upgradesPanel;
     public event System.EventHandler OnHideUpgrades;
     public event System.EventHandler OnDie;
@@ -16,7 +16,7 @@ public class CastleScript : MonoBehaviour
     public int ShieldUpgradeLevel { get; private set; } = 0;
     public int MoneyUpgradeLevel { get; private set; } = 0;
     public int Money { get; private set; } = 200;
-    private int defense = 5;
+    [SerializeField] private int defense = 5;
     private float moneyMultiplier = 1.0f;
     void Start()
     {
@@ -101,5 +101,10 @@ public class CastleScript : MonoBehaviour
     public int GetShield()
     {
         return shieldBar.GetShield();
+    }
+
+    public void AddMoney(int value)
+    {
+        Money += (int)(value * moneyMultiplier);
     }
 }

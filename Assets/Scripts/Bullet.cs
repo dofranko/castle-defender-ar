@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
-    public float speed;
-    public int damage;
+    public int Damage { get; set; }
     public Rigidbody rb;
+    [SerializeField] private float speed;
+    [SerializeField] private float lifeTime;
 
     // Update is called once per frame
     void Start()
     {
-        if (speed == 0)
-        {
-            speed = 0.002f;
-        }
+
+        Destroy(gameObject, lifeTime);
     }
     void FixedUpdate()
     {
@@ -23,10 +22,10 @@ public class BulletScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        var castle = other.GetComponent<CastleScript>();
+        var castle = other.GetComponent<Castle>();
         if (castle)
         {
-            castle.TakeDamage(damage);
+            castle.TakeDamage(Damage);
         }
         Destroy(gameObject);
     }

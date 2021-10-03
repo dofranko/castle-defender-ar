@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradesSystemScript : MonoBehaviour
+public class UpgradesSystem : MonoBehaviour
 {
 
-    public CastleScript castle;
+    public Castle castle;
     [SerializeField] private Text timerText;
     [SerializeField] private Text defenseText;
     [SerializeField] private Text healthText;
@@ -38,7 +38,6 @@ public class UpgradesSystemScript : MonoBehaviour
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, 3, masksToFilter))
             {
-                Debug.Log("hit " + hit.transform.name);
                 switch (hit.transform.name)
                 {
                     case "DefenseImage":

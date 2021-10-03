@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponRaycastScript : MonoBehaviour
+public class WeaponRaycast : MonoBehaviour
 {
 
     private Camera cam;

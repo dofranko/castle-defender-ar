@@ -5,7 +5,7 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
 [RequireComponent(typeof(ARRaycastManager))]
-public class PlacementScript : MonoBehaviour
+public class Placement : MonoBehaviour
 {
 
     public GameObject castleToPlace;
@@ -18,7 +18,6 @@ public class PlacementScript : MonoBehaviour
     private GameObject placementIndicator;
     private ARRaycastManager arRaycastManager;
     private Pose placementPose;
-    private EnemySpawner enemySpawner;
     void Awake()
     {
         arRaycastManager = GetComponent<ARRaycastManager>();

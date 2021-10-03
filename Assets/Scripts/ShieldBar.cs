@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShieldBarScript : MonoBehaviour
+public class ShieldBar : MonoBehaviour
 {
     public Slider slider;
     public Gradient gradient;

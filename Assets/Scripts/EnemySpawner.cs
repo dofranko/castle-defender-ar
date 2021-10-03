@@ -14,12 +14,12 @@ public class EnemySpawner : MonoBehaviour
     private State state = State.NotSpawned;
     public GameObject enemyPrefab;
 
-    private CastleScript castleScript;
-    private UpgradesSystemScript upgrades;
+    private Castle castleScript;
+    private UpgradesSystem upgrades;
 
     void Start()
     {
-        var placementScript = GetComponent<PlacementScript>();
+        var placementScript = GetComponent<Placement>();
         placementScript.OnCastleSpawn += OnCastleSpawnEventHandler;
     }
 
@@ -71,9 +71,10 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void OnEnemyDieEventHandler(object? sender, System.EventArgs e)
+    private void OnEnemyDieEventHandler(object? sender, Enemy.EnemyDieEventArgs e)
     {
-        StartCoroutine(CheckInBetweenWaves());
+        GetCastle().AddMoney(e.Money);
+        StartCoroutine(CheckInBetweenWaves(e));
     }
 
     private void OnCastleSpawnEventHandler(object? sender, System.EventArgs e)
@@ -81,17 +82,16 @@ public class EnemySpawner : MonoBehaviour
         SpawnEnemies();
     }
 
-    private IEnumerator CheckInBetweenWaves()
+    private IEnumerator CheckInBetweenWaves(Enemy.EnemyDieEventArgs e)
 
     {
         yield return new WaitForSeconds(1.0f);
-        GetCastle();
         if (state == State.Spawned)
         {
             var allEnemies = FindObjectsOfType<Enemy>();
             if (allEnemies.Length == 0)
             {
-                castleScript.DisplayUpgrades();
+                GetCastle().DisplayUpgrades();
                 timeRemaining = 60;
                 state = State.InBetweenWaves;
             }
@@ -102,21 +102,21 @@ public class EnemySpawner : MonoBehaviour
         this.timeRemaining = 0;
     }
 
-    private CastleScript GetCastle()
+    private Castle GetCastle()
     {
         if (!castleScript)
         {
-            castleScript = FindObjectOfType<CastleScript>();
+            castleScript = FindObjectOfType<Castle>();
             castleScript.OnHideUpgrades += OnCastleHideUpgradesEventHandler;
         }
         return castleScript;
     }
 
-    private UpgradesSystemScript GetTimerText()
+    private UpgradesSystem GetTimerText()
     {
         if (!upgrades)
         {
-            upgrades = castleScript.upgradesPanel.GetComponent<UpgradesSystemScript>();
+            upgrades = GetCastle().upgradesPanel.GetComponent<UpgradesSystem>();
         }
         return upgrades;
     }
