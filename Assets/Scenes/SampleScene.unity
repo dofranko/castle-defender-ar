@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3d1cedef3afbc479da90ffa43dddbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castleToPlace: {fileID: 4471508280538697815, guid: 4abfcf863dc4989478a3d0a926f7c316, type: 3}
+  castleToPlace: {fileID: 6968089966071907477, guid: cafe3b051b343d945b520bb1b6f1f8a3, type: 3}
   placementIndicatorPrefab: {fileID: 5513277538871564842, guid: f3989798d307dee4fbc68182d4696f60, type: 3}
   playerUI: {fileID: 752955193}
   weapon: {fileID: 380814551001927801, guid: 406353dbfec31ff47ba3d569fda14126, type: 3}
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d24514173c26f4ab54313ad7a676a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 5902356150032872874, guid: cc77e215c5a17f74d82f0b11b5ade210, type: 3}
+  enemyPrefab: {fileID: 157175924142576528, guid: fd2344b0d54f3aa4d8d0894faa847629, type: 3}
 --- !u!1 &517536782
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class Castle : MonoBehaviour
     public HealthBar healthBar;
     public ShieldBar shieldBar;
     public GameObject upgradesPanel;
+    public GameObject turretsPanel;
     public event System.EventHandler OnHideUpgrades;
     public event System.EventHandler OnDie;
     public event System.EventHandler OnShowUpgrades;
@@ -21,8 +22,8 @@ public class Castle : MonoBehaviour
     void Start()
     {
         healthBar.SetInitHealth(200);
-        upgradesPanel.SetActive(false);
         shieldBar.SetInitShield(50);
+        HideUpgrades(false);
     }
     public void TakeDamage(int damage)
     {
@@ -45,13 +46,15 @@ public class Castle : MonoBehaviour
     public void DisplayUpgrades()
     {
         upgradesPanel.SetActive(true);
+        turretsPanel.SetActive(true);
         OnShowUpgrades?.Invoke(this, System.EventArgs.Empty);
     }
 
     public void HideUpgrades(bool invokeHandler = true)
     {
         upgradesPanel.SetActive(false);
-        if (invokeHandler)
+        turretsPanel.SetActive(false);
+        if (invokeHandler) //TODO naprawić
         {
             OnHideUpgrades?.Invoke(this, System.EventArgs.Empty);
         }

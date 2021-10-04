@@ -23,6 +23,7 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         var castle = other.GetComponent<Castle>();
+        if (!castle) castle = other.GetComponentInParent<Castle>();
         if (castle)
         {
             castle.TakeDamage(Damage);

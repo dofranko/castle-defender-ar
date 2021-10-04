@@ -829,6 +829,7 @@ MonoBehaviour:
   healthBar: {fileID: 7256826481947575667}
   shieldBar: {fileID: 6488496470374117360}
   upgradesPanel: {fileID: 8245986056085704512}
+  defense: 5
 --- !u!65 &1278402896461765707
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -48,14 +48,14 @@ public class Placement : MonoBehaviour
                 Instantiate(castleToPlace, placementPose.position, placementPose.rotation);
                 OnCastleSpawn?.Invoke(this, System.EventArgs.Empty);
 
-                Destroy(placementIndicator);
-                placementIndicator = null;
-                Instantiate(weapon);
+                //Destroy(placementIndicator);
+                placementIndicator.SetActive(false);
+                //Instantiate(weapon);
 
+                ///TODO add to game engine (handler or sth)s
                 ARPlaneManager arpm = GetComponent<ARPlaneManager>();
                 arpm.planePrefab = null;
                 arpm.SetTrackablesActive(false);
-
                 playerUI.SetActive(true);
 
                 enabled = false;

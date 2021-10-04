@@ -7,6 +7,7 @@ public class UpgradesSystem : MonoBehaviour
 {
 
     public Castle castle;
+    public GameObject basicTurretGameObject;
     [SerializeField] private Text timerText;
     [SerializeField] private Text defenseText;
     [SerializeField] private Text healthText;
@@ -85,6 +86,21 @@ public class UpgradesSystem : MonoBehaviour
                         break;
                     case "SkipImage":
                         castle.HideUpgrades();
+                        break;
+                    case "BasicTurretImage":
+                        var placement = FindObjectOfType<Placement>(); //TODO przerobić na getplacement
+                        if (placement)
+                        {
+                            placement.enabled = true;
+                            placement.castleToPlace = basicTurretGameObject;
+                        }
+                        break;
+
+                    case "ExplosiveTurretImage":
+                        break;
+                    case "ElectricTurretImage":
+                        break;
+                    case "FrozingTurretImage":
                         break;
                 }
                 moneyInfoText.text = $"Money: {castle.Money}";

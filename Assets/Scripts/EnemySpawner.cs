@@ -79,7 +79,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnCastleSpawnEventHandler(object? sender, System.EventArgs e)
     {
-        SpawnEnemies();
+        if (state != State.InBetweenWaves) //TODO zrobić z tym porządek
+            SpawnEnemies();
     }
 
     private IEnumerator CheckInBetweenWaves(Enemy.EnemyDieEventArgs e)

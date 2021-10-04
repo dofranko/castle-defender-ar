@@ -50,6 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19807529882e2a7408a7d1aee280d86d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!223 &7108923178305197455
 Canvas:
   m_ObjectHideFlags: 0
