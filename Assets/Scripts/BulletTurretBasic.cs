@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class BulletTurretBasic : MonoBehaviour
 {
+
     public int Damage { get; set; }
     public Rigidbody rb;
     [SerializeField] private float speed;
@@ -22,11 +23,11 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        var castle = other.GetComponent<Castle>();
-        if (!castle) castle = other.GetComponentInParent<Castle>();
-        if (castle)
+        var enemy = other.GetComponent<Enemy>();
+        if (!enemy) enemy = other.GetComponentInParent<Enemy>();
+        if (enemy)
         {
-            castle.TakeDamage(Damage);
+            enemy.TakeDamage(Damage);
             Destroy(gameObject);
         }
     }

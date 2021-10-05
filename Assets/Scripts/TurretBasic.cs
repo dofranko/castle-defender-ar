@@ -11,15 +11,19 @@ public class TurretBasic : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float range;
     [SerializeField] private LayerMask enemyLayerMask;
+    [SerializeField] private WeaponPrefab weapon;
+    private float nextTimeToFire = 0.0f;
     void Start()
     {
+        weapon.SetDamage(damage);
         InvokeRepeating("UpdateTarget", 1f, 1.0f / fireRate);
+
     }
 
     private void UpdateTarget()
     {
         if (target) return;
-        foreach (var enemyCollider in Physics.OverlapSphere(transform.position, range, enemyLayerMask, QueryTriggerInteraction.Ignore))
+        foreach (var enemyCollider in Physics.OverlapSphere(transform.position, range, enemyLayerMask, QueryTriggerInteraction.UseGlobal))
         {
             var enemy = enemyCollider.GetComponent<Enemy>();
             if (!enemy) enemy = enemyCollider.transform.parent.GetComponent<Enemy>();
@@ -34,6 +38,12 @@ public class TurretBasic : MonoBehaviour
     void Update()
     {
         if (!target) return;
+
         transform.LookAt(target);
+        if (Time.time >= nextTimeToFire)
+        {
+            nextTimeToFire = Time.time + 1f / fireRate;
+            weapon.Shoot();
+        }
     }
 }
