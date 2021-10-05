@@ -392,7 +392,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.585989, y: 0.585989, z: 0.001}
-  m_Center: {x: 0.0019345284, y: 0.0019346476, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1733286686826508017
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castle: {fileID: 7752403580413525836}
   basicTurretGameObject: {fileID: 5608707421201796344, guid: 76ed501be760a0744bbaf6ebc9144c40, type: 3}
+  explosiveTurretGameObject: {fileID: 5608707421201796344, guid: 3290a78477dccff47b48f0edf8a21ef1, type: 3}
   timerText: {fileID: 6321680740689376602}
   defenseText: {fileID: 3632764431752381073}
   healthText: {fileID: 2199484313690476079}
@@ -609,6 +610,9 @@ MonoBehaviour:
   moneyText: {fileID: 6532866739012835842}
   infoText: {fileID: 8199092336792369715}
   moneyInfoText: {fileID: 3928599057965859327}
+  raycastableUILayerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &3468180559028611845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1146,6 +1150,7 @@ GameObject:
   - component: {fileID: 6287488551553968430}
   - component: {fileID: 6228105641165491434}
   - component: {fileID: 8606784958646475336}
+  - component: {fileID: 4224980863356737093}
   m_Layer: 9
   m_Name: ExplosiveTurretImage
   m_TagString: Untagged
@@ -1210,6 +1215,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!65 &4224980863356737093
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658179611725211722}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.581669, y: 0.57768476, z: 0.001}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2673696257239173959
 GameObject:
   m_ObjectHideFlags: 0
@@ -2629,6 +2647,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e652c24092fa43c44a436b6891ca298d, type: 3}
+--- !u!1 &2032253624344433747 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8726875445894860069, guid: e652c24092fa43c44a436b6891ca298d, type: 3}
+  m_PrefabInstance: {fileID: 7289099208163367286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2032253623139734360 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8726875447101884974, guid: e652c24092fa43c44a436b6891ca298d, type: 3}
@@ -2664,11 +2687,6 @@ GameObject:
 --- !u!224 &2032253624344433759 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8726875445894860073, guid: e652c24092fa43c44a436b6891ca298d, type: 3}
-  m_PrefabInstance: {fileID: 7289099208163367286}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2032253624344433747 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8726875445894860069, guid: e652c24092fa43c44a436b6891ca298d, type: 3}
   m_PrefabInstance: {fileID: 7289099208163367286}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7967582148950580132
@@ -2856,6 +2874,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6631e3849a660b34abff2f1123b42d35, type: 3}
+--- !u!224 &6977650672084145930 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1028810355262229678, guid: 6631e3849a660b34abff2f1123b42d35, type: 3}
+  m_PrefabInstance: {fileID: 7967582148950580132}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1053802468325228934 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6921278374656989730, guid: 6631e3849a660b34abff2f1123b42d35, type: 3}
@@ -2867,11 +2890,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764498c4341ab0d44bcbe375d944411d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &6977650672084145930 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1028810355262229678, guid: 6631e3849a660b34abff2f1123b42d35, type: 3}
-  m_PrefabInstance: {fileID: 7967582148950580132}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8157237929228813418
 PrefabInstance:
   m_ObjectHideFlags: 0

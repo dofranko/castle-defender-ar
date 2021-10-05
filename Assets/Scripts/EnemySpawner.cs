@@ -32,13 +32,13 @@ public class EnemySpawner : MonoBehaviour
         if (state == State.Spawned)
             yield return new WaitForSeconds(0.0f);
         yield return new WaitForSeconds(3.0f);
-        var castleLocation = GetCastle().transform.position;
+        var castleLocation = GetCastle()?.transform.position ?? new Vector3();
         for (int i = 0; i < 2; i++)
         {
             Vector3 newLocation = new Vector3(
-                castleLocation.x - Random.Range(2, 12) * (Random.Range(0, 1) * 2 - 1),
+                castleLocation.x - Random.Range(2.0f, 12.0f) * (Random.Range(0, 2) * 2 - 1),
                 castleLocation.y,
-                castleLocation.z - Random.Range(2, 10) * (Random.Range(0, 1) * 2 - 1));
+                castleLocation.z - Random.Range(2.0f, 10.0f) * (Random.Range(0, 2) * 2 - 1));
             var enemy = Instantiate(enemyPrefab, newLocation, new Quaternion());
             var enemyEnemyComp = enemy.GetComponent<Enemy>();
             enemyEnemyComp.CastlePosition = castleLocation;
@@ -64,7 +64,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 timeRemaining = 0;
                 state = State.NotSpawned;
-                GetCastle().HideUpgrades(false);
+                GetCastle()?.HideUpgrades(false);
                 SpawnEnemies();
             }
 
@@ -73,7 +73,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyDieEventHandler(object? sender, Enemy.EnemyDieEventArgs e)
     {
-        GetCastle().AddMoney(e.Money);
+        GetCastle()?.AddMoney(e.Money);
         StartCoroutine(CheckInBetweenWaves(e));
     }
 
@@ -92,7 +92,7 @@ public class EnemySpawner : MonoBehaviour
             var allEnemies = FindObjectsOfType<Enemy>();
             if (allEnemies.Length == 0)
             {
-                GetCastle().DisplayUpgrades();
+                GetCastle()?.DisplayUpgrades();
                 timeRemaining = 60;
                 state = State.InBetweenWaves;
             }
@@ -108,7 +108,10 @@ public class EnemySpawner : MonoBehaviour
         if (!castleScript)
         {
             castleScript = FindObjectOfType<Castle>();
-            castleScript.OnHideUpgrades += OnCastleHideUpgradesEventHandler;
+            if (castleScript)
+            {
+                castleScript.OnHideUpgrades += OnCastleHideUpgradesEventHandler;
+            }
         }
         return castleScript;
     }
@@ -117,7 +120,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (!upgrades)
         {
-            upgrades = GetCastle().upgradesPanel.GetComponent<UpgradesSystem>();
+            upgrades = GetCastle()?.upgradesPanel.GetComponent<UpgradesSystem>();
         }
         return upgrades;
     }

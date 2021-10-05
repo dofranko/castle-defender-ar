@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5608707421201796345}
   - component: {fileID: -3543331430296073807}
   m_Layer: 0
-  m_Name: BasicAllyTurret
+  m_Name: TurretBasic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,9 +116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1062bc610d4ba0b4781393ff87f2ac34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.3
-  damage: 10
-  range: 20
+  fireRate: 0.6
+  damage: 6
+  range: 3
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 256

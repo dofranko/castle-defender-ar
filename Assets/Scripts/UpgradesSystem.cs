@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class UpgradesSystem : MonoBehaviour
 {
 
-    public Castle castle;
-    public GameObject basicTurretGameObject;
+    [SerializeField] private Castle castle;
+    [SerializeField] private GameObject basicTurretGameObject;
+    [SerializeField] private GameObject explosiveTurretGameObject;
     [SerializeField] private Text timerText;
     [SerializeField] private Text defenseText;
     [SerializeField] private Text healthText;
@@ -15,9 +16,9 @@ public class UpgradesSystem : MonoBehaviour
     [SerializeField] private Text moneyText;
     [SerializeField] private TMPro.TMP_Text infoText;
     [SerializeField] private Text moneyInfoText;
+    [SerializeField] private LayerMask raycastableUILayerMask;
     private Camera cam;
-    private int masksToFilter;
-
+    private Placement placement;
     private void Awake()
     {
         castle.OnShowUpgrades += OnCastleShowUpgrades;
@@ -25,7 +26,6 @@ public class UpgradesSystem : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        masksToFilter = LayerMask.GetMask("Raycastable UI");
     }
     private void OnCastleShowUpgrades(object? sender, System.EventArgs e)
     {
@@ -37,7 +37,7 @@ public class UpgradesSystem : MonoBehaviour
     {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, 3, masksToFilter))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, 3, raycastableUILayerMask))
             {
                 switch (hit.transform.name)
                 {
@@ -88,15 +88,21 @@ public class UpgradesSystem : MonoBehaviour
                         castle.HideUpgrades();
                         break;
                     case "BasicTurretImage":
-                        var placement = FindObjectOfType<Placement>(); //TODO przerobić na getplacement
-                        if (placement)
+                        var place = GetPlacement();
+                        if (place)
                         {
-                            placement.enabled = true;
-                            placement.castleToPlace = basicTurretGameObject;
+                            place.enabled = true;
+                            place.castleToPlace = basicTurretGameObject;
                         }
                         break;
 
                     case "ExplosiveTurretImage":
+                        var placeE = GetPlacement();
+                        if (placeE)
+                        {
+                            placeE.enabled = true;
+                            placeE.castleToPlace = explosiveTurretGameObject;
+                        }
                         break;
                     case "ElectricTurretImage":
                         break;
@@ -116,5 +122,11 @@ public class UpgradesSystem : MonoBehaviour
     private void ShowNotEnoughMoney()
     {
         infoText.text = "Not enough money to buy it";
+    }
+
+    private Placement GetPlacement()
+    {
+        if (!placement) placement = FindObjectOfType<Placement>();
+        return placement;
     }
 }
