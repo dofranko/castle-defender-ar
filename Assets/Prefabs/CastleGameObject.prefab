@@ -603,6 +603,7 @@ MonoBehaviour:
   castle: {fileID: 7752403580413525836}
   basicTurretGameObject: {fileID: 5608707421201796344, guid: 76ed501be760a0744bbaf6ebc9144c40, type: 3}
   explosiveTurretGameObject: {fileID: 5608707421201796344, guid: 3290a78477dccff47b48f0edf8a21ef1, type: 3}
+  electricTurretGameObject: {fileID: 5608707421201796344, guid: 020ef86a8209f3744878d2eb15350ff3, type: 3}
   timerText: {fileID: 6321680740689376602}
   defenseText: {fileID: 3632764431752381073}
   healthText: {fileID: 2199484313690476079}
@@ -896,6 +897,7 @@ GameObject:
   - component: {fileID: 7136464180446695815}
   - component: {fileID: 3474034301351165396}
   - component: {fileID: 6352406479162848674}
+  - component: {fileID: 2517508438787614344}
   m_Layer: 9
   m_Name: ElectricTurretImage
   m_TagString: Untagged
@@ -960,6 +962,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!65 &2517508438787614344
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2149573093292781857}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.59479475, y: 0.5906087, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2215894925214248913
 GameObject:
   m_ObjectHideFlags: 0
@@ -2647,11 +2662,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e652c24092fa43c44a436b6891ca298d, type: 3}
---- !u!1 &2032253624344433747 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8726875445894860069, guid: e652c24092fa43c44a436b6891ca298d, type: 3}
-  m_PrefabInstance: {fileID: 7289099208163367286}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2032253623139734360 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8726875447101884974, guid: e652c24092fa43c44a436b6891ca298d, type: 3}
@@ -2687,6 +2697,11 @@ GameObject:
 --- !u!224 &2032253624344433759 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8726875445894860073, guid: e652c24092fa43c44a436b6891ca298d, type: 3}
+  m_PrefabInstance: {fileID: 7289099208163367286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2032253624344433747 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8726875445894860069, guid: e652c24092fa43c44a436b6891ca298d, type: 3}
   m_PrefabInstance: {fileID: 7289099208163367286}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7967582148950580132

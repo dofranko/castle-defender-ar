@@ -36,9 +36,9 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             Vector3 newLocation = new Vector3(
-                castleLocation.x - Random.Range(2.0f, 12.0f) * (Random.Range(0, 2) * 2 - 1),
+                castleLocation.x - Random.Range(2.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1),
                 castleLocation.y,
-                castleLocation.z - Random.Range(2.0f, 10.0f) * (Random.Range(0, 2) * 2 - 1));
+                castleLocation.z - Random.Range(2.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1));
             var enemy = Instantiate(enemyPrefab, newLocation, new Quaternion());
             var enemyEnemyComp = enemy.GetComponent<Enemy>();
             enemyEnemyComp.CastlePosition = castleLocation;

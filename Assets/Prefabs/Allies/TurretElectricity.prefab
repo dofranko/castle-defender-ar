@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 5608707421203026168}
   - component: {fileID: 5608707421203993144}
   - component: {fileID: 5608707421192453944}
-  - component: {fileID: 5608707421201796345}
-  - component: {fileID: -3543331430296073807}
+  - component: {fileID: 3895682414100340213}
+  - component: {fileID: -9154097612696561458}
   m_Layer: 0
-  m_Name: TurretExplosive
+  m_Name: TurretElectricity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0fa719f353ab4b46a34e0dcb178dc8a, type: 2}
+  - {fileID: 2100000, guid: 13feaf1a1d060694087d9454e3b6861e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,7 +104,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5608707421201796345
+--- !u!114 &3895682414100340213
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,17 +113,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5608707421201796344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1062bc610d4ba0b4781393ff87f2ac34, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb3bf4f32743f1469c62341513fc546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.28
-  damage: 10
+  fireRate: 1
+  retargetRate: 2
+  damage: 1
   range: 2
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  weapon: {fileID: -3543331430296073807}
---- !u!114 &-3543331430296073807
+  weaponMulti: {fileID: -9154097612696561458}
+--- !u!114 &-9154097612696561458
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,11 +133,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5608707421201796344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43e524c6509a33b46b4db9b9dfe34188, type: 3}
+  m_Script: {fileID: 11500000, guid: c8b874d8b599b3e4e86e1e1f5f5dbfea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 6444925024502881815}
-  bulletPrefab: {fileID: 5952915095740297902, guid: 0c05a4dc49b2da04189604d05ce30407, type: 3}
+  rayPrefab: {fileID: 6730565654363574364, guid: 74a091c513a9a4c4cb282dc589f509e4, type: 3}
 --- !u!1 &5691448772409311125
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5691448772409311125}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0.156}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5608707421201699032}

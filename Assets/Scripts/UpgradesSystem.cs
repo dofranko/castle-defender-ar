@@ -9,6 +9,7 @@ public class UpgradesSystem : MonoBehaviour
     [SerializeField] private Castle castle;
     [SerializeField] private GameObject basicTurretGameObject;
     [SerializeField] private GameObject explosiveTurretGameObject;
+    [SerializeField] private GameObject electricTurretGameObject;
     [SerializeField] private Text timerText;
     [SerializeField] private Text defenseText;
     [SerializeField] private Text healthText;
@@ -105,6 +106,12 @@ public class UpgradesSystem : MonoBehaviour
                         }
                         break;
                     case "ElectricTurretImage":
+                        var placeEl = GetPlacement();
+                        if (placeEl)
+                        {
+                            placeEl.enabled = true;
+                            placeEl.castleToPlace = electricTurretGameObject;
+                        }
                         break;
                     case "FrozingTurretImage":
                         break;
