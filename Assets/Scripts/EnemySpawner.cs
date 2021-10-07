@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
     }
     private float timeRemaining = 0;
     private State state = State.NotSpawned;
-    public GameObject enemyPrefab;
+    public Enemy enemyPrefab;
 
     private Castle castleScript;
     private UpgradesSystem upgrades;
@@ -40,9 +40,8 @@ public class EnemySpawner : MonoBehaviour
                 castleLocation.y,
                 castleLocation.z - Random.Range(2.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1));
             var enemy = Instantiate(enemyPrefab, newLocation, new Quaternion());
-            var enemyEnemyComp = enemy.GetComponent<Enemy>();
-            enemyEnemyComp.CastlePosition = castleLocation;
-            enemyEnemyComp.OnDie += OnEnemyDieEventHandler;
+            enemy.CastlePosition = castleLocation;
+            enemy.OnDie += OnEnemyDieEventHandler;
         }
         state = State.Spawned;
 

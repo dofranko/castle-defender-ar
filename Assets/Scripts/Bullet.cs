@@ -6,16 +6,15 @@ public class Bullet : MonoBehaviour
 {
     public int Damage { get; set; }
     public Rigidbody rb;
-    [SerializeField] private float speed;
-    [SerializeField] private float lifeTime;
+    [SerializeField] protected float speed;
+    [SerializeField] protected float lifeTime;
 
-    // Update is called once per frame
-    void Start()
+    protected void Start()
     {
 
         Destroy(gameObject, lifeTime);
     }
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         rb.velocity = transform.forward * speed;
     }

@@ -11,6 +11,7 @@ public class WeaponPrefabMulti : MonoBehaviour
         this.damage = damage;
     }
 
+
     public void Shoot(List<Transform> targets)
     {
         foreach (var target in targets)
