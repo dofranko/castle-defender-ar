@@ -150,11 +150,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 7947238793505019010}
   weapon: {fileID: 1777888472747110905}
-  fireSpeed: 0.5
+  _fireSpeed: 0.3
   healthMax: 20
   attack: 15
   defense: 2
-  speed: 0.3
+  _speed: 0
   range: 1.5
   accuracy: 0.85
   money: 15
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 9169535575124736713}
-  bulletPrefab: {fileID: 947737207179238372, guid: 97358b79f74b6d44eb2a7cccb756768c, type: 3}
+  bulletPrefab: {fileID: 0}
 --- !u!1001 &1028810356242763424
 PrefabInstance:
   m_ObjectHideFlags: 0

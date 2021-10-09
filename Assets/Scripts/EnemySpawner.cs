@@ -44,7 +44,6 @@ public class EnemySpawner : MonoBehaviour
             enemy.OnDie += OnEnemyDieEventHandler;
         }
         state = State.Spawned;
-
     }
 
     void Update()

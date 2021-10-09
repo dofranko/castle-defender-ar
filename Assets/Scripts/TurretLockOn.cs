@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretBasic : MonoBehaviour
+public class TurretLockOn : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     protected Transform target;
     [SerializeField] protected float fireRate;
     [SerializeField] protected int damage;
     [SerializeField] protected float range;
     [SerializeField] protected LayerMask enemyLayerMask;
-    [SerializeField] private WeaponPrefab weapon;
+    [SerializeField] private WeaponPrefabLockon weapon;
     protected float nextTimeToFire = 0.0f;
+
     void Start()
     {
         weapon.SetDamage(damage);
@@ -42,7 +41,8 @@ public class TurretBasic : MonoBehaviour
         if (Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
-            weapon.Shoot();
+            weapon.Shoot(target);
         }
+
     }
 }

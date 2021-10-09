@@ -45,7 +45,14 @@ public class Placement : MonoBehaviour
             placementIndicator.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                Instantiate(castleToPlace, placementPose.position, placementPose.rotation);
+                var mesh = castleToPlace.GetComponentInChildren<MeshFilter>().mesh;
+                Vector3 bottom = new Vector3();
+                if (mesh)
+                {
+                    bottom = new Vector3(0, mesh.bounds.size.y, 0);
+                    Debug.Log($"{bottom}; {bottom.y}");
+                }
+                Instantiate(castleToPlace, placementPose.position + bottom, placementPose.rotation);
                 OnCastleSpawn?.Invoke(this, System.EventArgs.Empty);
 
                 //Destroy(placementIndicator);

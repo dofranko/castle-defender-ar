@@ -5,13 +5,13 @@ using UnityEngine;
 public class BulletTurretExplosive : Bullet
 {
 
-    [SerializeField] private float radius;
-    [SerializeField] private LayerMask enemyLayerMask;
-    [SerializeField] private GameObject explosionGameObject;
+    [SerializeField] protected float explosionRadius;
+    [SerializeField] protected LayerMask enemyLayerMask;
+    [SerializeField] protected GameObject explosionGameObject;
     void OnTriggerEnter(Collider other)
     {
         Instantiate(explosionGameObject, other.transform.position, Quaternion.identity);
-        foreach (var enemyCollider in Physics.OverlapSphere(transform.position, radius, enemyLayerMask, QueryTriggerInteraction.UseGlobal))
+        foreach (var enemyCollider in Physics.OverlapSphere(transform.position, explosionRadius, enemyLayerMask, QueryTriggerInteraction.UseGlobal))
         {
             var enemy = enemyCollider.GetComponent<Enemy>();
             if (!enemy) enemy = enemyCollider.GetComponentInParent<Enemy>();

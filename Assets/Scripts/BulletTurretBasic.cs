@@ -11,7 +11,7 @@ public class BulletTurretBasic : Bullet
         if (enemy)
         {
             enemy.TakeDamage(Damage);
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }

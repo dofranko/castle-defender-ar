@@ -10,6 +10,7 @@ public class UpgradesSystem : MonoBehaviour
     [SerializeField] private GameObject basicTurretGameObject;
     [SerializeField] private GameObject explosiveTurretGameObject;
     [SerializeField] private GameObject electricTurretGameObject;
+    [SerializeField] private GameObject frozingTurretGameObject;
     [SerializeField] private Text timerText;
     [SerializeField] private Text defenseText;
     [SerializeField] private Text healthText;
@@ -38,7 +39,7 @@ public class UpgradesSystem : MonoBehaviour
     {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, 3, raycastableUILayerMask))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, 100, raycastableUILayerMask))
             {
                 switch (hit.transform.name)
                 {
@@ -114,6 +115,12 @@ public class UpgradesSystem : MonoBehaviour
                         }
                         break;
                     case "FrozingTurretImage":
+                        var placeF = GetPlacement();
+                        if (placeF)
+                        {
+                            placeF.enabled = true;
+                            placeF.castleToPlace = frozingTurretGameObject;
+                        }
                         break;
                 }
                 moneyInfoText.text = $"Money: {castle.Money}";
