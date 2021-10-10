@@ -45,19 +45,16 @@ public class Placement : MonoBehaviour
             placementIndicator.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                var mesh = castleToPlace.GetComponentInChildren<MeshFilter>().mesh;
+                var meshFilter = castleToPlace.GetComponentInChildren<MeshFilter>();
+                var mesh = meshFilter.mesh;
                 Vector3 bottom = new Vector3();
                 if (mesh)
-                {
-                    bottom = new Vector3(0, mesh.bounds.size.y, 0);
-                    Debug.Log($"{bottom}; {bottom.y}");
-                }
+                    bottom = new Vector3(0, mesh.bounds.size.y / 2 * meshFilter.transform.localScale.y, 0);
+
                 Instantiate(castleToPlace, placementPose.position + bottom, placementPose.rotation);
                 OnCastleSpawn?.Invoke(this, System.EventArgs.Empty);
 
-                //Destroy(placementIndicator);
                 placementIndicator.SetActive(false);
-                //Instantiate(weapon);
 
                 ///TODO add to game engine (handler or sth)s
                 ARPlaneManager arpm = GetComponent<ARPlaneManager>();
