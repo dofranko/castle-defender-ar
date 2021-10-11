@@ -281,6 +281,22 @@ PrefabInstance:
       propertyPath: turret
       value: 
       objectReference: {fileID: 5608707421201796345}
+    - target: {fileID: 7706892992560281098, guid: 7e2ffd0fbda0c99488caa62662126cf2, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1702557792764447882}
+    - target: {fileID: 7706892992560281098, guid: 7e2ffd0fbda0c99488caa62662126cf2, type: 3}
+      propertyPath: topRight
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706892992560281098, guid: 7e2ffd0fbda0c99488caa62662126cf2, type: 3}
+      propertyPath: bottomLeft
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706892992560281098, guid: 7e2ffd0fbda0c99488caa62662126cf2, type: 3}
+      propertyPath: maxViewportWidth
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e2ffd0fbda0c99488caa62662126cf2, type: 3}
 --- !u!1 &7138262276071276829 stripped
@@ -291,5 +307,10 @@ GameObject:
 --- !u!224 &6964097747239556008 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 572121548796960442, guid: 7e2ffd0fbda0c99488caa62662126cf2, type: 3}
+  m_PrefabInstance: {fileID: 7446112115215846674}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &1702557792764447882 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 8139505146328514968, guid: 7e2ffd0fbda0c99488caa62662126cf2, type: 3}
   m_PrefabInstance: {fileID: 7446112115215846674}
   m_PrefabAsset: {fileID: 0}
