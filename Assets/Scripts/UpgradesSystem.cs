@@ -8,9 +8,13 @@ public class UpgradesSystem : MonoBehaviour
 
     [SerializeField] private Castle castle;
     [SerializeField] private GameObject basicTurretGameObject;
+    [SerializeField] private int basicTurretCost;
     [SerializeField] private GameObject explosiveTurretGameObject;
+    [SerializeField] private int explosiveTurretCost;
     [SerializeField] private GameObject electricTurretGameObject;
+    [SerializeField] private int electricTurretCost;
     [SerializeField] private GameObject frozingTurretGameObject;
+    [SerializeField] private int frozingTurretCost;
     [SerializeField] private Text timerText;
     [SerializeField] private Text defenseText;
     [SerializeField] private Text healthText;
@@ -19,19 +23,17 @@ public class UpgradesSystem : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text infoText;
     [SerializeField] private Text moneyInfoText;
     [SerializeField] private LayerMask raycastableUILayerMask;
+    public event System.EventHandler OnSkipButtonPressed;
     private Camera cam;
     private Placement placement;
-    private void Awake()
-    {
-        castle.OnShowUpgrades += OnCastleShowUpgrades;
-    }
+
     void Start()
     {
         cam = Camera.main;
     }
-    private void OnCastleShowUpgrades(object? sender, System.EventArgs e)
+    public void PrepareShops(int money)
     {
-        moneyInfoText.text = $"Money: {castle.Money}";
+        moneyInfoText.text = $"Money: {money}";
         infoText.text = "Upgrade equipement or start new wave...";
     }
 
@@ -87,40 +89,52 @@ public class UpgradesSystem : MonoBehaviour
                         infoText.text += $"Money multiplier: {castle.GetMoneyMultiplier()}";
                         break;
                     case "SkipImage":
-                        castle.HideUpgrades();
+                        OnSkipButtonPressed?.Invoke(this, System.EventArgs.Empty);
                         break;
                     case "BasicTurretImage":
                         var place = GetPlacement();
-                        if (place)
+                        if (place && castle.Money >= basicTurretCost)
                         {
                             place.enabled = true;
                             place.castleToPlace = basicTurretGameObject;
+                            castle.SpendMoney(basicTurretCost);
                         }
+                        else ShowNotEnoughMoney();
                         break;
 
                     case "ExplosiveTurretImage":
                         var placeE = GetPlacement();
-                        if (placeE)
+                        if (placeE && castle.Money >= explosiveTurretCost)
                         {
                             placeE.enabled = true;
                             placeE.castleToPlace = explosiveTurretGameObject;
+                            castle.SpendMoney(explosiveTurretCost);
                         }
+                        else ShowNotEnoughMoney();
                         break;
                     case "ElectricTurretImage":
                         var placeEl = GetPlacement();
-                        if (placeEl)
+                        if (placeEl && castle.Money >= electricTurretCost)
                         {
                             placeEl.enabled = true;
                             placeEl.castleToPlace = electricTurretGameObject;
+                            castle.SpendMoney(electricTurretCost);
                         }
+                        else ShowNotEnoughMoney();
                         break;
                     case "FrozingTurretImage":
                         var placeF = GetPlacement();
-                        if (placeF)
+                        if (placeF && castle.Money >= frozingTurretCost)
                         {
                             placeF.enabled = true;
                             placeF.castleToPlace = frozingTurretGameObject;
+                            castle.SpendMoney(frozingTurretCost);
                         }
+                        else ShowNotEnoughMoney();
+                        break;
+                    case "UpgradeTurretImage":
+                        var uts = hit.transform.GetComponentInParent<UpgradeTurretSystem>();
+                        if (uts) castle.SpendMoney(uts.UpgradeTurret(castle.Money));
                         break;
                 }
                 moneyInfoText.text = $"Money: {castle.Money}";

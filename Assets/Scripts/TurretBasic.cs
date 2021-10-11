@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretBasic : MonoBehaviour
+public class TurretBasic : UpgradableTurret
 {
     // Start is called before the first frame update
-
     protected Transform target;
     [SerializeField] protected float fireRate;
     [SerializeField] protected int damage;
     [SerializeField] protected float range;
     [SerializeField] protected LayerMask enemyLayerMask;
     [SerializeField] private WeaponPrefab weapon;
+
     protected float nextTimeToFire = 0.0f;
-    void Start()
+    protected void Start()
     {
+        HideUpgrades();
         weapon.SetDamage(damage);
         InvokeRepeating("UpdateTarget", 1f, 1.0f / fireRate);
-
     }
 
     void UpdateTarget()
@@ -44,5 +44,17 @@ public class TurretBasic : MonoBehaviour
             nextTimeToFire = Time.time + 1f / fireRate;
             weapon.Shoot();
         }
+    }
+
+    public new bool Upgrade(int money)
+    {
+        if (!base.Upgrade(money))
+            return false;
+
+        damage = (int)(1.5f * damage);
+        weapon.SetDamage(damage);
+        fireRate *= 1.2f;
+        range *= 1.3f;
+        return true;
     }
 }

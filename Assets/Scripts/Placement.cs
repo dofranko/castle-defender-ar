@@ -52,7 +52,7 @@ public class Placement : MonoBehaviour
                     bottom = new Vector3(0, mesh.bounds.size.y / 2 * meshFilter.transform.localScale.y, 0);
 
                 Instantiate(castleToPlace, placementPose.position + bottom, placementPose.rotation);
-                OnCastleSpawn?.Invoke(this, System.EventArgs.Empty);
+                OnCastleSpawn?.Invoke(this, System.EventArgs.Empty); //TODO zamienic na onobjectspawn
 
                 placementIndicator.SetActive(false);
 

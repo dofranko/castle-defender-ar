@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretMulti : MonoBehaviour
+public class TurretMulti : UpgradableTurret
 {
     [SerializeField] private float fireRate;
     [SerializeField] private float retargetRate;
     [SerializeField] private int damage;
     [SerializeField] private float range;
     [SerializeField] private LayerMask enemyLayerMask;
-    [SerializeField] private WeaponPrefabMulti weaponMulti;
+    [SerializeField] private WeaponPrefabMulti weapon;
     private float nextTimeToFire = 0.0f;
     private List<Transform> targets = new List<Transform>();
     void Start()
     {
-        weaponMulti.SetDamage(damage);
+        HideUpgrades();
+        weapon.SetDamage(damage);
         InvokeRepeating("UpdateTargets", 1f, 1.0f / retargetRate);
-
     }
 
     private void UpdateTargets()
@@ -40,7 +40,19 @@ public class TurretMulti : MonoBehaviour
         if (Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
-            weaponMulti.Shoot(targets);
+            weapon.Shoot(targets);
         }
+    }
+
+    public new bool Upgrade(int money)
+    {
+        if (!base.Upgrade(money))
+            return false;
+
+        damage = (int)(1.7f * damage);
+        weapon.SetDamage(damage);
+        fireRate *= 1.1f;
+        range *= 1.2f;
+        return true;
     }
 }

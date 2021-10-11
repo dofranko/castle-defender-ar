@@ -6,9 +6,8 @@ public class Castle : MonoBehaviour
 {
     public HealthBar healthBar;
     public ShieldBar shieldBar;
-    public GameObject upgradesPanel;
+    public UpgradesSystem upgradesPanel;
     public GameObject turretsPanel;
-    public event System.EventHandler OnHideUpgrades;
     public event System.EventHandler OnDie;
     public event System.EventHandler OnShowUpgrades;
 
@@ -23,7 +22,7 @@ public class Castle : MonoBehaviour
     {
         healthBar.SetInitHealth(200);
         shieldBar.SetInitShield(50);
-        HideUpgrades(false);
+        HideUpgrades();
     }
     public void TakeDamage(int damage)
     {
@@ -43,21 +42,17 @@ public class Castle : MonoBehaviour
         OnDie?.Invoke(this, System.EventArgs.Empty);
     }
 
-    public void DisplayUpgrades()
+    public void ShowUpgrades()
     {
-        upgradesPanel.SetActive(true);
+        upgradesPanel.gameObject.SetActive(true);
         turretsPanel.SetActive(true);
-        OnShowUpgrades?.Invoke(this, System.EventArgs.Empty);
+        upgradesPanel.PrepareShops(Money);
     }
 
-    public void HideUpgrades(bool invokeHandler = true)
+    public void HideUpgrades()
     {
-        upgradesPanel.SetActive(false);
+        upgradesPanel.gameObject.SetActive(false);
         turretsPanel.SetActive(false);
-        if (invokeHandler) //TODO naprawić
-        {
-            OnHideUpgrades?.Invoke(this, System.EventArgs.Empty);
-        }
     }
 
     public void UpgradeDefense(int moneyCost)
@@ -109,5 +104,11 @@ public class Castle : MonoBehaviour
     public void AddMoney(int value)
     {
         Money += (int)(value * moneyMultiplier);
+    }
+
+    public void SpendMoney(int value)
+    {
+        if (value <= 0) return;
+        Money -= value;
     }
 }

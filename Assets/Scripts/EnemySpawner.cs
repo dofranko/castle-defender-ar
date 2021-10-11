@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
     private float timeRemaining = 0;
     private State state = State.NotSpawned;
     public Enemy enemyPrefab;
-
+    private int waveNumber = 0;
     private Castle castleScript;
     private UpgradesSystem upgrades;
 
@@ -33,12 +33,12 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(0.0f);
         yield return new WaitForSeconds(3.0f);
         var castleLocation = GetCastle()?.transform.position ?? new Vector3();
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < Random.Range(waveNumber + 2 + (int)(waveNumber * 1.6), waveNumber + 4 + (int)(waveNumber * 1.8)); i++)
         {
             Vector3 newLocation = new Vector3(
-                castleLocation.x - Random.Range(2.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1),
+                castleLocation.x - Random.Range(4.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1),
                 castleLocation.y,
-                castleLocation.z - Random.Range(2.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1));
+                castleLocation.z - Random.Range(4.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1));
             var enemy = Instantiate(enemyPrefab, newLocation, new Quaternion());
             enemy.CastlePosition = castleLocation;
             enemy.OnDie += OnEnemyDieEventHandler;
@@ -60,10 +60,7 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                timeRemaining = 0;
-                state = State.NotSpawned;
-                GetCastle()?.HideUpgrades(false);
-                SpawnEnemies();
+                CloseShopsAndStartWave();
             }
 
         }
@@ -78,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
     private void OnCastleSpawnEventHandler(object? sender, System.EventArgs e)
     {
         if (state != State.InBetweenWaves) //TODO zrobić z tym porządek
-            SpawnEnemies();
+            CloseShopsAndStartWave();
     }
 
     private IEnumerator CheckInBetweenWaves(Enemy.EnemyDieEventArgs e)
@@ -88,17 +85,38 @@ public class EnemySpawner : MonoBehaviour
         if (state == State.Spawned)
         {
             var allEnemies = FindObjectsOfType<Enemy>();
-            if (allEnemies.Length == 0)
+            if (allEnemies.Length == 0 && state == State.Spawned) //double check 
             {
-                GetCastle()?.DisplayUpgrades();
+                StartShops();
                 timeRemaining = 60;
-                state = State.InBetweenWaves;
             }
         }
     }
-    private void OnCastleHideUpgradesEventHandler(object? sender, System.EventArgs e)
+    private void StartShops()
     {
-        this.timeRemaining = 0;
+        state = State.InBetweenWaves;
+        GetCastle()?.ShowUpgrades();
+        foreach (var turret in FindObjectsOfType<UpgradableTurret>())
+        {
+            turret.ShowUpgrades();
+        }
+    }
+
+    private void CloseShopsAndStartWave()
+    {
+        timeRemaining = 0;
+        waveNumber++;
+        state = State.NotSpawned;
+        GetCastle()?.HideUpgrades();
+        foreach (var turret in FindObjectsOfType<UpgradableTurret>())
+        {
+            turret.HideUpgrades();
+        }
+        SpawnEnemies();
+    }
+    private void OnSkipButtonPressedEventHandler(object? sender, System.EventArgs e)
+    {
+        CloseShopsAndStartWave();
     }
 
     private Castle GetCastle()
@@ -108,7 +126,7 @@ public class EnemySpawner : MonoBehaviour
             castleScript = FindObjectOfType<Castle>();
             if (castleScript)
             {
-                castleScript.OnHideUpgrades += OnCastleHideUpgradesEventHandler;
+                castleScript.upgradesPanel.OnSkipButtonPressed += OnSkipButtonPressedEventHandler;
             }
         }
         return castleScript;

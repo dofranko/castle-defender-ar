@@ -616,9 +616,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castle: {fileID: 7752403580413525836}
   basicTurretGameObject: {fileID: 5608707421201796344, guid: 76ed501be760a0744bbaf6ebc9144c40, type: 3}
+  basicTurretCost: 20
   explosiveTurretGameObject: {fileID: 5608707421201796344, guid: 3290a78477dccff47b48f0edf8a21ef1, type: 3}
+  explosiveTurretCost: 35
   electricTurretGameObject: {fileID: 5608707421201796344, guid: 020ef86a8209f3744878d2eb15350ff3, type: 3}
+  electricTurretCost: 40
   frozingTurretGameObject: {fileID: 5608707421201796344, guid: f06ac8a7a960fb94280e62d1405159cd, type: 3}
+  frozingTurretCost: 38
   timerText: {fileID: 6321680740689376602}
   defenseText: {fileID: 3632764431752381073}
   healthText: {fileID: 2199484313690476079}
@@ -2199,7 +2203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1053802468325228934}
   shieldBar: {fileID: 3468180559028611845}
-  upgradesPanel: {fileID: 1748828626121821109}
+  upgradesPanel: {fileID: 3917362922558807417}
   turretsPanel: {fileID: 4844466736534436631}
   defense: 5
 --- !u!1 &7304848198759408410

@@ -10,7 +10,7 @@ public class BulletTurretExplosive : Bullet
     [SerializeField] protected GameObject explosionGameObject;
     void OnTriggerEnter(Collider other)
     {
-        Instantiate(explosionGameObject, other.transform.position, Quaternion.identity);
+        Instantiate(explosionGameObject, transform.position, Quaternion.identity);
         foreach (var enemyCollider in Physics.OverlapSphere(transform.position, explosionRadius, enemyLayerMask, QueryTriggerInteraction.UseGlobal))
         {
             var enemy = enemyCollider.GetComponent<Enemy>();
