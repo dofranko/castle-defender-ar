@@ -31,11 +31,11 @@ public class Billboard : MonoBehaviour
         transform.LookAt(transform.position + cam.transform.forward);
         if (!doScale) return;
 
-        var firstX = cam.WorldToViewportPoint(bottomLeft.position).x;
-        var secondX = cam.WorldToViewportPoint(topRight.position).x;
-        if ((firstX < 0 && secondX < 0) || (firstX > 1 && secondX > 1)) return;//jeśli są całkiem poza kadrem
+        var firstX = cam.WorldToViewportPoint(bottomLeft.position);
+        var secondX = cam.WorldToViewportPoint(topRight.position);
+        if ((firstX.x < 0 && secondX.x < 0) || (firstX.x > 1 && secondX.x > 1)) return;//jeśli są całkiem poza kadrem
 
-        var uiViewportWidth = Mathf.Abs(secondX - firstX);
+        var uiViewportWidth = Mathf.Abs(Vector2.Distance(new Vector2(secondX.x, secondX.y), new Vector2(firstX.x, firstX.y)));
         if (uiViewportWidth > maxViewportWidth)
         {
             transform.localScale -= scalingVector * Time.deltaTime;

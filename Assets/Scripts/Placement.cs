@@ -58,8 +58,8 @@ public class Placement : MonoBehaviour
 
                 ///TODO add to game engine (handler or sth)s
                 ARPlaneManager arpm = GetComponent<ARPlaneManager>();
-                arpm.planePrefab = null;
-                arpm.SetTrackablesActive(false);
+                //arpm.planePrefab = null;
+                //arpm.SetTrackablesActive(false);
                 playerUI.SetActive(true);
 
                 enabled = false;
