@@ -25,8 +25,7 @@ public class TurretBasic : UpgradableTurret
         if (target) return;
         foreach (var enemyCollider in Physics.OverlapSphere(transform.position, range, enemyLayerMask, QueryTriggerInteraction.UseGlobal))
         {
-            var enemy = enemyCollider.GetComponent<Enemy>();
-            if (!enemy) enemy = enemyCollider.transform.parent.GetComponent<Enemy>();
+            var enemy = enemyCollider.GetComponentInParent<Enemy>();
             if (enemy)
             {
                 target = enemy.transform;
@@ -38,7 +37,8 @@ public class TurretBasic : UpgradableTurret
     {
         if (!target) return;
 
-        transform.LookAt(target);
+        CannonLookAt(target);
+
         if (Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;

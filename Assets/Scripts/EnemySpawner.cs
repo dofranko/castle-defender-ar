@@ -65,7 +65,8 @@ public class EnemySpawner : MonoBehaviour
                 castleLocation.x - Random.Range(4.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1),
                 castleLocation.y,
                 castleLocation.z - Random.Range(4.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1));
-            var enemy = Instantiate(enemyPrefab, newLocation, new Quaternion());
+            var enemy = Instantiate(enemyPrefab, newLocation, Quaternion.LookRotation(castleLocation - newLocation));
+            //enemy.transform.LookAt(castleLocation);
             enemy.CastlePosition = castleLocation;
             enemy.OnDie += OnEnemyDieEventHandler;
         }

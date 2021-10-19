@@ -13,14 +13,17 @@ public abstract class UpgradableTurret : MonoBehaviour
         }
     }
     [SerializeField] private List<int> upgradesCostsList;
+    [SerializeField] private List<GameObject> upgradesNewGameObjects;
     [SerializeField] private GameObject upgradesPanel;
     private int MaxUpgradeLvl { get { return upgradesCostsList.Count; } }
-
+    [SerializeField] private GameObject cannon;
     public bool Upgrade(int money)
     {
         if (MaxUpgradeLvl == UpgradeLvl) return false;
         if (UpgradeCost < 0) return false;
         if (money < UpgradeCost) return false;
+        if (upgradesNewGameObjects != null && upgradesNewGameObjects.Count >= UpgradeLvl + 1)
+            upgradesNewGameObjects[UpgradeLvl]?.SetActive(true);
         UpgradeLvl++;
         return true;
     }
@@ -33,6 +36,11 @@ public abstract class UpgradableTurret : MonoBehaviour
     public void ShowUpgrades()
     {
         upgradesPanel.SetActive(true);
+    }
+
+    protected void CannonLookAt(Transform lookTarget)
+    {
+        if (cannon) cannon.transform.LookAt(lookTarget);
     }
 }
 

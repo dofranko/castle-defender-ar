@@ -108,13 +108,17 @@ public class Enemy : MonoBehaviour
         switch (state)
         {
             case State.Moving:
-                transform.LookAt(CastlePosition);
+                //transform.LookAt(CastlePosition);
                 if (Vector3.Distance(transform.position, CastlePosition) >= 1.0f)
                 {
                     transform.position += transform.forward * Speed * Time.deltaTime;
                     if (Vector3.Distance(transform.position, CastlePosition) <= 1.5f)
                     {
                         state = State.Shooting;
+                        var anim = GetComponentInChildren<Animator>();
+                        if (anim) anim.StopPlayback();
+                        var castle = FindObjectOfType<Castle>();
+                        if (castle) transform.LookAt(castle.gameObject.transform);
                     }
                 }
                 break;

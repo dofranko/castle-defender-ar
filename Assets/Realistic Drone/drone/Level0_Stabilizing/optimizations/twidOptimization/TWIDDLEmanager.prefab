@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &114554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 476444}
+  - component: {fileID: 11400504}
+  m_Layer: 0
+  m_Name: TWIDDLEmanager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &476444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114554}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 315, y: 8.994526, z: -1071}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11400504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e55dabd5e8942047a2d11bd162686b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalIndividual: {fileID: 193520, guid: 979fc5f838d46744aa26f426a3934492, type: 3}
+  startingTime: 10
+  actualTime: 0
+  maxExpTime: 60
+  step: 0.1
+  experiments:
+  - {fileID: 144708, guid: d1951b27032f8e44d8f06b0ad038b9a1, type: 3}
+  - {fileID: 138106, guid: 348ec027916c14544a409e6e657d345c, type: 3}
+  - {fileID: 112372, guid: b93e3d90809fae14ca5e6cd17f41320b, type: 3}
+  - {fileID: 108072, guid: fc31fa50c869c144596bfe5d43e927a3, type: 3}
+  - {fileID: 168184, guid: 13b68357f95f866419a7b0101502d478, type: 3}
+  - {fileID: 144806, guid: 9b6fd27595b2fe74d95a0ed758d7e28e, type: 3}
+  - {fileID: 173318, guid: 0668a61165adda6488cc4dee2c2f23e4, type: 3}
+  myVals:
+  - 0.2550368
+  - 0.000879506
+  - 0.00005183293
+  - 0.5
+  - 0.3107572
+  - 0.0000617386
+  - 0.0041668667
+  - 0.5
+  - 0.1292282
+  - 0.00004828544
+  - 0.003238074
+  - 0.5
+  - 0.1686556
+  - 0.00004934592
+  - 0.0035060504
+  - 0.5
+  - 0.387976
+  - 0.8637424
+  - 0.3278309
+  - 0.8811749
+  - 0.5664734
+  - 0
+  - 0.925845
+  - 0.964066
+  potencialChanges:
+  - 0.005
+  - 0.000025
+  - 0.000025
+  - 0
+  - 0.005
+  - 0.000025
+  - 0.000025
+  - 0
+  - 0.005
+  - 0.000025
+  - 0.000025
+  - 0
+  - 0.005
+  - 0.000025
+  - 0.000025
+  - 0
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0
+  - 0.1
+  - 0.1
+  PathFileToRead: initialState
+  readFile: 1
+  autoSave: 1
+  folder: twidStats
+  save: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponPrefabMulti : MonoBehaviour
 {
     public GameObject rayPrefab;
+    [SerializeField] private GameObject firePoint;
     private int damage = 3;
     public void SetDamage(int damage)
     {
@@ -17,11 +18,11 @@ public class WeaponPrefabMulti : MonoBehaviour
         foreach (var target in targets)
         {
             if (!target) continue;
-            var electGameObject = Instantiate(rayPrefab, gameObject.transform.position, Quaternion.identity);
+            var electGameObject = Instantiate(rayPrefab, firePoint.transform.position, Quaternion.identity);
             var caster = electGameObject.GetComponent<ParticleCaster>();
             if (caster)
             {
-                caster.Cast(gameObject.transform.position, target.transform.position);
+                caster.Cast(firePoint.transform.position, target.transform.position);
                 var enemy = target.GetComponent<Enemy>();
                 {
                     if (enemy) enemy.TakeDamage(damage);

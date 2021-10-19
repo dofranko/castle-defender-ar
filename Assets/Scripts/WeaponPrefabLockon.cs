@@ -14,7 +14,7 @@ public class WeaponPrefabLockon : MonoBehaviour
     }
     public void Shoot(Transform target)
     {
-        var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+        var bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         if (bullet)
         {
             bullet.Damage = damage;

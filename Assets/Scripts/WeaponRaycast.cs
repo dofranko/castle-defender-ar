@@ -20,12 +20,8 @@ public class WeaponRaycast : MonoBehaviour
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, 10, enemyLayerMask)) //! MASKA KTÓRĄ MA RAYCASTOWAĆ
             {
-                Enemy enemy = hit.transform.GetComponent<Enemy>();
-                if (!enemy) enemy = hit.transform.parent.transform.GetComponent<Enemy>();
-                if (enemy)
-                {
-                    enemy.TakeDamage(damage);
-                }
+                Enemy enemy = hit.transform.GetComponentInParent<Enemy>();
+                if (enemy) enemy.TakeDamage(damage);
             }
         }
     }

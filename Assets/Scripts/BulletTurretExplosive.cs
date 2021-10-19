@@ -13,8 +13,7 @@ public class BulletTurretExplosive : Bullet
         Instantiate(explosionGameObject, transform.position, Quaternion.identity);
         foreach (var enemyCollider in Physics.OverlapSphere(transform.position, explosionRadius, enemyLayerMask, QueryTriggerInteraction.UseGlobal))
         {
-            var enemy = enemyCollider.GetComponent<Enemy>();
-            if (!enemy) enemy = enemyCollider.GetComponentInParent<Enemy>();
+            var enemy = enemyCollider.GetComponentInParent<Enemy>();
             if (enemy)
             {
                 enemy.TakeDamage(Damage);

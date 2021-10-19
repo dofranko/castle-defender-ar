@@ -6,8 +6,7 @@ public class BulletTurretBasic : Bullet
 {
     void OnTriggerEnter(Collider other)
     {
-        var enemy = other.GetComponent<Enemy>();
-        if (!enemy) enemy = other.GetComponentInParent<Enemy>();
+        var enemy = other.GetComponentInParent<Enemy>();
         if (enemy)
         {
             enemy.TakeDamage(Damage);

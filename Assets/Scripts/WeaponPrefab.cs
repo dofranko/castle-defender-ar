@@ -13,12 +13,8 @@ public class WeaponPrefab : MonoBehaviour
     }
     public void Shoot()
     {
-        var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-        if (bullet)
-        {
-            bullet.Damage = damage;
-            return;
-        }
+        var bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        if (bullet) bullet.Damage = damage;
     }
 
 }

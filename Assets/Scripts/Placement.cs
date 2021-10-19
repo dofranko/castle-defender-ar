@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -10,8 +11,7 @@ public class Placement : MonoBehaviour
 
     public GameObject castleToPlace;
     public GameObject placementIndicatorPrefab;
-    public GameObject playerUI;
-    public GameObject weapon;
+    public GameObject crosshairImage;
 
     public event System.EventHandler OnCastleSpawn;
 
@@ -46,10 +46,10 @@ public class Placement : MonoBehaviour
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 var meshFilter = castleToPlace.GetComponentInChildren<MeshFilter>();
-                var mesh = meshFilter.mesh;
+                var mesh = meshFilter.sharedMesh;
                 Vector3 bottom = new Vector3();
                 if (mesh)
-                    bottom = new Vector3(0, mesh.bounds.size.y / 2 * meshFilter.transform.localScale.y, 0);
+                    bottom = new Vector3(0, Mathf.Abs(mesh.vertices.Min(v => v.y)) * meshFilter.transform.localScale.y, 0);
 
                 Instantiate(castleToPlace, placementPose.position + bottom, placementPose.rotation);
                 OnCastleSpawn?.Invoke(this, System.EventArgs.Empty); //TODO zamienic na onobjectspawn
@@ -60,7 +60,7 @@ public class Placement : MonoBehaviour
                 ARPlaneManager arpm = GetComponent<ARPlaneManager>();
                 //arpm.planePrefab = null;
                 //arpm.SetTrackablesActive(false);
-                playerUI.SetActive(true);
+                crosshairImage.SetActive(true);
 
                 enabled = false;
             }

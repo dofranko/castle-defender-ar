@@ -24,8 +24,7 @@ public class TurretMulti : UpgradableTurret
         targets = new List<Transform>();
         foreach (var enemyCollider in Physics.OverlapSphere(transform.position, range, enemyLayerMask, QueryTriggerInteraction.UseGlobal))
         {
-            var enemy = enemyCollider.GetComponent<Enemy>();
-            if (!enemy) enemy = enemyCollider.transform.parent.GetComponent<Enemy>();
+            var enemy = enemyCollider.GetComponentInParent<Enemy>();
             if (enemy)
             {
                 targets.Add(enemy.transform);
