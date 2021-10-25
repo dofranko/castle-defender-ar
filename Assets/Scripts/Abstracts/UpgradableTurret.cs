@@ -35,7 +35,8 @@ public abstract class UpgradableTurret : MonoBehaviour
 
     public void ShowUpgrades()
     {
-        upgradesPanel.SetActive(true);
+        if (UpgradeCost > 0)
+            upgradesPanel.SetActive(true);
     }
 
     protected void CannonLookAt(Transform lookTarget)

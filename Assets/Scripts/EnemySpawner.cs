@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    enum State
+    public enum State
     {
         JustBeforeWave,
         DuringWave,
         InBetweenWaves
     }
     private float timeRemaining = 0;
-    private State state = State.JustBeforeWave;
+    public State state { get; private set; } = State.JustBeforeWave;
     public Enemy enemyPrefab;
     private int waveNumber = 0;
     private Castle _castleScript;
@@ -25,6 +25,7 @@ public class EnemySpawner : MonoBehaviour
                 if (_castleScript)
                 {
                     _castleScript.upgradesPanel.OnSkipButtonPressed += OnSkipButtonPressedEventHandler;
+                    _castleScript.OnDie += OnCastleDieEventHandler;
                 }
             }
             return _castleScript;
@@ -43,12 +44,25 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    [SerializeField] private GameObject crosshairImage;
+    [SerializeField] private GameObject handImage;
+    [SerializeField] private GameObject loseImage;
     void Start()
     {
         var placementScript = GetComponent<Placement>();
         placementScript.OnCastleSpawn += OnCastleSpawnEventHandler;
     }
 
+    public void ShowHand()
+    {
+        handImage?.SetActive(true);
+        crosshairImage?.SetActive(false);
+    }
+    public void ShowCrosshair()
+    {
+        handImage?.SetActive(false);
+        crosshairImage?.SetActive(true);
+    }
     private void SpawnEnemies()
     {
         StartCoroutine(SpawnEnemiesEnumerator());
@@ -69,6 +83,7 @@ public class EnemySpawner : MonoBehaviour
             //enemy.transform.LookAt(castleLocation);
             enemy.CastlePosition = castleLocation;
             enemy.OnDie += OnEnemyDieEventHandler;
+            yield return new WaitForSeconds(Random.Range(1.0f, 2.0f));
         }
         state = State.DuringWave;
     }
@@ -145,5 +160,8 @@ public class EnemySpawner : MonoBehaviour
     {
         CloseShopsAndStartWave();
     }
-
+    private void OnCastleDieEventHandler(object? sender, System.EventArgs e)
+    {
+        loseImage.SetActive(true);
+    }
 }

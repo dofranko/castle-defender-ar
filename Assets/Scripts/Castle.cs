@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Castle : MonoBehaviour
@@ -17,9 +18,14 @@ public class Castle : MonoBehaviour
     public int MoneyUpgradeLevel { get; private set; } = 0;
     public int Money { get; private set; } = 200;
     [SerializeField] private int defense = 5;
+    [SerializeField] private List<GameObject> hideableUi;
+    private EnemySpawner engine;
+
+
     private float moneyMultiplier = 1.0f;
     void Start()
     {
+        engine = FindObjectOfType<EnemySpawner>();
         healthBar.SetInitHealth(200);
         shieldBar.SetInitShield(50);
         HideUpgrades();
@@ -46,13 +52,22 @@ public class Castle : MonoBehaviour
     {
         upgradesPanel.gameObject.SetActive(true);
         turretsPanel.SetActive(true);
+        foreach (var obj in hideableUi)
+            obj?.SetActive(true);
         upgradesPanel.PrepareShops(Money);
+        engine?.ShowHand();
     }
 
-    public void HideUpgrades()
+    public void HideUpgrades(bool doHideAll = true)
     {
         upgradesPanel.gameObject.SetActive(false);
         turretsPanel.SetActive(false);
+        if (doHideAll)
+        {
+            foreach (var obj in hideableUi)
+                obj?.SetActive(false);
+            engine?.ShowCrosshair();
+        }
     }
 
     public void UpgradeDefense(int moneyCost)

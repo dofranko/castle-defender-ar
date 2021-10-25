@@ -8,10 +8,14 @@ public class Billboard : MonoBehaviour
     [SerializeField] private Transform bottomLeft;
     [SerializeField] private Transform topRight;
     [SerializeField] private float maxViewportWidth;
+    [SerializeField] private int degreeSnap;
+    [SerializeField] private bool rotateUp;
+
     private bool doScale = false;
     private Vector2 originalScale;
     private Vector3 scalingVector;
     private float startScalingUpViewport;
+
     // private Vector3 scalingVectorUp;
     private Camera cam;
     void Start()
@@ -19,7 +23,7 @@ public class Billboard : MonoBehaviour
         cam = Camera.main;
         if (bottomLeft && topRight && canvas && maxViewportWidth > 0)
         {
-            doScale = true;
+            doScale = false;
             originalScale = new Vector2(transform.localScale.x, transform.localScale.y);
             scalingVector = new Vector3(0.15f * originalScale.x, 0.15f * originalScale.y);
             startScalingUpViewport = maxViewportWidth - 0.1f;
@@ -28,7 +32,20 @@ public class Billboard : MonoBehaviour
     }
     void LateUpdate()
     {
-        transform.LookAt(transform.position + cam.transform.forward);
+        if (rotateUp)
+        {
+            transform.LookAt(transform.position + cam.transform.forward);
+        }
+        else
+        {
+            var lookPos = transform.position - cam.transform.position;
+            lookPos.y = 0;
+            transform.rotation = Quaternion.LookRotation(lookPos);
+        }
+        if (degreeSnap != 0)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Round(transform.eulerAngles.y / degreeSnap) * degreeSnap, transform.eulerAngles.z);
+        }
         if (!doScale) return;
 
         var firstX = cam.WorldToViewportPoint(bottomLeft.position);

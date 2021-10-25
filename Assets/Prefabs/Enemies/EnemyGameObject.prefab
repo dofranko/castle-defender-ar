@@ -1118,6 +1118,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 309300469641127694}
     - target: {fileID: 1028810355262229679, guid: 6631e3849a660b34abff2f1123b42d35, type: 3}
+      propertyPath: rotateUp
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028810355262229679, guid: 6631e3849a660b34abff2f1123b42d35, type: 3}
       propertyPath: topRight
       value: 
       objectReference: {fileID: 1503231632839025728}

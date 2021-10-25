@@ -9,9 +9,10 @@ using UnityEngine.XR.ARSubsystems;
 public class Placement : MonoBehaviour
 {
 
+    public event System.EventHandler OnPlace;
     public GameObject castleToPlace;
     public GameObject placementIndicatorPrefab;
-    public GameObject crosshairImage;
+    //public GameObject crosshairImage;
 
     public event System.EventHandler OnCastleSpawn;
 
@@ -60,8 +61,9 @@ public class Placement : MonoBehaviour
                 ARPlaneManager arpm = GetComponent<ARPlaneManager>();
                 //arpm.planePrefab = null;
                 //arpm.SetTrackablesActive(false);
-                crosshairImage.SetActive(true);
+                ///crosshairImage.SetActive(true);
 
+                OnPlace?.Invoke(this, System.EventArgs.Empty);
                 enabled = false;
             }
         }

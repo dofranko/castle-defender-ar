@@ -33,8 +33,8 @@ public class UpgradesSystem : MonoBehaviour
     }
     public void PrepareShops(int money)
     {
-        moneyInfoText.text = $"Money: {money}";
-        infoText.text = "Upgrade equipement or start new wave...";
+        moneyInfoText.text = $"{money}";
+        infoText.text = "Upgrade your Castle";
     }
 
     void Update()
@@ -92,56 +92,46 @@ public class UpgradesSystem : MonoBehaviour
                         OnSkipButtonPressed?.Invoke(this, System.EventArgs.Empty);
                         break;
                     case "BasicTurretImage":
-                        var place = GetPlacement();
-                        if (place && castle.Money >= basicTurretCost)
-                        {
-                            place.enabled = true;
-                            place.castleToPlace = basicTurretGameObject;
-                            castle.SpendMoney(basicTurretCost);
-                        }
-                        else ShowNotEnoughMoney();
+                        if (!PlaceTurret(basicTurretCost, basicTurretGameObject))
+                            ShowNotEnoughMoney();
                         break;
 
                     case "ExplosiveTurretImage":
-                        var placeE = GetPlacement();
-                        if (placeE && castle.Money >= explosiveTurretCost)
-                        {
-                            placeE.enabled = true;
-                            placeE.castleToPlace = explosiveTurretGameObject;
-                            castle.SpendMoney(explosiveTurretCost);
-                        }
-                        else ShowNotEnoughMoney();
+                        if (!PlaceTurret(explosiveTurretCost, explosiveTurretGameObject))
+                            ShowNotEnoughMoney();
                         break;
                     case "ElectricTurretImage":
-                        var placeEl = GetPlacement();
-                        if (placeEl && castle.Money >= electricTurretCost)
-                        {
-                            placeEl.enabled = true;
-                            placeEl.castleToPlace = electricTurretGameObject;
-                            castle.SpendMoney(electricTurretCost);
-                        }
-                        else ShowNotEnoughMoney();
+                        if (!PlaceTurret(electricTurretCost, electricTurretGameObject))
+                            ShowNotEnoughMoney();
                         break;
                     case "FrozingTurretImage":
-                        var placeF = GetPlacement();
-                        if (placeF && castle.Money >= frozingTurretCost)
-                        {
-                            placeF.enabled = true;
-                            placeF.castleToPlace = frozingTurretGameObject;
-                            castle.SpendMoney(frozingTurretCost);
-                        }
-                        else ShowNotEnoughMoney();
+                        if (!PlaceTurret(frozingTurretCost, frozingTurretGameObject))
+                            ShowNotEnoughMoney();
                         break;
                     case "UpgradeTurretImage":
                         var uts = hit.transform.GetComponentInParent<UpgradeTurretSystem>();
                         if (uts) castle.SpendMoney(uts.UpgradeTurret(castle.Money));
                         break;
                 }
-                moneyInfoText.text = $"Money: {castle.Money}";
+                moneyInfoText.text = $"{castle.Money}";
             }
         }
     }
 
+    private bool PlaceTurret(int cost, GameObject turretPrefab)
+    {
+        var placeF = GetPlacement();
+        if (placeF && castle.Money >= cost)
+        {
+            placeF.enabled = true;
+            placeF.castleToPlace = turretPrefab;
+            placeF.OnPlace += OnTurretPlace;
+            castle.SpendMoney(cost);
+            castle.HideUpgrades(false);
+            return true;
+        }
+        return false;
+    }
     public void SetTimerText(string text)
     {
         timerText.text = text;
@@ -156,5 +146,15 @@ public class UpgradesSystem : MonoBehaviour
     {
         if (!placement) placement = FindObjectOfType<Placement>();
         return placement;
+    }
+    private void OnTurretPlace(object? sender, System.EventArgs e)
+    {
+        (sender as Placement).OnPlace -= OnTurretPlace;
+        var engine = FindObjectOfType<EnemySpawner>();
+        if (engine && engine.state == EnemySpawner.State.InBetweenWaves)
+        {
+            castle.ShowUpgrades();
+        }
+
     }
 }
