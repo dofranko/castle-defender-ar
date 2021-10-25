@@ -72,12 +72,12 @@ public class EnemySpawner : MonoBehaviour
         if (state == State.DuringWave)
             yield return new WaitForSeconds(0.0f);
         yield return new WaitForSeconds(3.0f);
-        var castleLocation = Castle?.transform.position ?? new Vector3();
+        var castleLocation = Castle?.transform.position + new Vector3(0, 0.5f, 0) ?? new Vector3();
         for (int i = 0; i < Random.Range(waveNumber + (int)(waveNumber * 1.6), waveNumber + 1 + (int)(waveNumber * 1.8)); i++)
         {
             Vector3 newLocation = new Vector3(
                 castleLocation.x - Random.Range(4.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1),
-                castleLocation.y + 0.5f,
+                castleLocation.y + 0.3f,
                 castleLocation.z - Random.Range(4.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1));
             var enemy = Instantiate(enemyPrefab, newLocation, Quaternion.LookRotation(castleLocation - newLocation));
             //enemy.transform.LookAt(castleLocation);
@@ -118,6 +118,8 @@ public class EnemySpawner : MonoBehaviour
     {
         if (state != State.InBetweenWaves) //TODO zrobić z tym porządek
             CloseShopsAndStartWave();
+        (sender as Placement).OnCastleSpawn -= OnCastleSpawnEventHandler;
+
     }
 
     private IEnumerator CheckInBetweenWaves(Enemy.EnemyDieEventArgs e)

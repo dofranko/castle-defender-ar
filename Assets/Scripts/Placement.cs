@@ -13,7 +13,7 @@ public class Placement : MonoBehaviour
     public GameObject castleToPlace;
     public GameObject placementIndicatorPrefab;
     //public GameObject crosshairImage;
-
+    public float CastleFloorPositionY { get; private set; } = Mathf.Infinity;
     public event System.EventHandler OnCastleSpawn;
 
     private GameObject placementIndicator;
@@ -50,11 +50,12 @@ public class Placement : MonoBehaviour
                 var mesh = meshFilter.sharedMesh;
                 Vector3 bottom = new Vector3();
                 if (mesh)
-                    bottom = new Vector3(0, Mathf.Abs(mesh.vertices.Min(v => v.y)) * meshFilter.transform.localScale.y, 0);
+                    bottom = new Vector3(0, Mathf.Abs(mesh.vertices.Min(v => v.y)) / meshFilter.transform.localScale.y, 0);
 
                 Instantiate(castleToPlace, placementPose.position + bottom, placementPose.rotation);
                 OnCastleSpawn?.Invoke(this, System.EventArgs.Empty); //TODO zamienic na onobjectspawn
-
+                if (CastleFloorPositionY == Mathf.Infinity)
+                    CastleFloorPositionY = placementPose.position.y;
                 placementIndicator.SetActive(false);
 
                 ///TODO add to game engine (handler or sth)s
