@@ -77,7 +77,7 @@ public class EnemySpawner : MonoBehaviour
         {
             Vector3 newLocation = new Vector3(
                 castleLocation.x - Random.Range(4.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1),
-                castleLocation.y,
+                castleLocation.y + 0.5f,
                 castleLocation.z - Random.Range(4.0f, 5.0f) * (Random.Range(0, 2) * 2 - 1));
             var enemy = Instantiate(enemyPrefab, newLocation, Quaternion.LookRotation(castleLocation - newLocation));
             //enemy.transform.LookAt(castleLocation);
