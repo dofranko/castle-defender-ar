@@ -11,6 +11,13 @@ public class HdrLightEstimation : MonoBehaviour
 
     void OnEnable()
     {
+        if (PlayerPrefs.HasKey("dynamic_light"))
+        {
+            if (PlayerPrefs.GetInt("dynamic_light") == 0){
+                enabled = false;
+                return;
+            }
+        }
         if (cameraManager && light)
         {
             cameraManager.frameReceived += FrameChanged;

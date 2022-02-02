@@ -51,7 +51,7 @@ public class UpgradesSystem : MonoBehaviour
                             ShowNotEnoughMoney();
                             break;
                         }
-                        castle.UpgradeDefense(20); //TODO Parametrize
+                        castle.UpgradeDefense(20);
                         defenseText.text = $"Lvl {castle.DefenseUpgradeLevel}";
                         infoText.text = $"Upgraded defense from lvl {castle.DefenseUpgradeLevel - 1} to lvl {castle.DefenseUpgradeLevel}";
                         break;

@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dae4501572e1418791be3e3bf1f7faa, type: 3}
-  m_Name: AR Core Settings
+  m_Script: {fileID: 11500000, guid: 54d21f6ece3b46479f0c328f8c6007e0, type: 3}
+  m_Name: Gold
   m_EditorClassIdentifier: 
-  m_Requirement: 0
-  m_Depth: 1
-  m_IgnoreGradleVersion: 0
+  colorMode: 3
+  topLeft: {r: 1, g: 0.85633945, b: 0, a: 1}
+  topRight: {r: 1, g: 0.9352654, b: 0, a: 1}
+  bottomLeft: {r: 1, g: 0.771629, b: 0, a: 1}
+  bottomRight: {r: 1, g: 0.77660096, b: 0, a: 1}

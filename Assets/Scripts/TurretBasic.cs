@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TurretBasic : UpgradableTurret
 {
-    // Start is called before the first frame update
     protected Transform target;
     [SerializeField] protected float fireRate;
     [SerializeField] protected int damage;

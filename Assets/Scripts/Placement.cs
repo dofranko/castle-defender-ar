@@ -16,6 +16,9 @@ public class Placement : MonoBehaviour
     public float CastleFloorPositionY { get; private set; } = Mathf.Infinity;
     public event System.EventHandler OnCastleSpawn;
 
+    [SerializeField] private GameObject planeVisualizer;
+    [SerializeField] private GameObject planeWithShadows;
+    [SerializeField] private ARPlaneManager aRPlaneManager;
     private GameObject placementIndicator;
     private ARRaycastManager arRaycastManager;
     private Pose placementPose;
@@ -29,6 +32,15 @@ public class Placement : MonoBehaviour
     {
         placementIndicator = Instantiate(placementIndicatorPrefab, new Vector3(), new Quaternion());
         placementIndicator.SetActive(false);
+        if (!PlayerPrefs.HasKey("visualize_planes"))
+        {
+            aRPlaneManager.planePrefab = planeVisualizer;
+        }
+        else if (PlayerPrefs.GetInt("visualize_planes") == 1)
+        {
+            aRPlaneManager.planePrefab = planeVisualizer;
+        }
+
     }
 
 
@@ -44,7 +56,7 @@ public class Placement : MonoBehaviour
             placementPose.rotation = Quaternion.LookRotation(new Vector3(cameraForward.x, 0, cameraForward.z).normalized);
             placementIndicator.SetActive(true);
             placementIndicator.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began /*&& !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)*/)
             {
                 var meshFilter = castleToPlace.GetComponentInChildren<MeshFilter>();
                 var mesh = meshFilter.sharedMesh;
@@ -53,16 +65,30 @@ public class Placement : MonoBehaviour
                     bottom = new Vector3(0, Mathf.Abs(mesh.vertices.Min(v => v.y)) / meshFilter.transform.localScale.y, 0);
 
                 Instantiate(castleToPlace, placementPose.position + bottom, placementPose.rotation);
-                OnCastleSpawn?.Invoke(this, System.EventArgs.Empty); //TODO zamienic na onobjectspawn
+                OnCastleSpawn?.Invoke(this, System.EventArgs.Empty);
                 if (CastleFloorPositionY == Mathf.Infinity)
                     CastleFloorPositionY = placementPose.position.y;
                 placementIndicator.SetActive(false);
-
-                ///TODO add to game engine (handler or sth)s
-                ARPlaneManager arpm = GetComponent<ARPlaneManager>();
-                //arpm.planePrefab = null;
-                //arpm.SetTrackablesActive(false);
-                ///crosshairImage.SetActive(true);
+                if (castleToPlace.GetComponentInChildren<Castle>() != null)
+                {
+                    var newPlane = GetGamePlanePrefab();
+                    aRPlaneManager.planePrefab = newPlane;
+                    if (newPlane != null)
+                    {
+                        var material = newPlane.GetComponent<MeshRenderer>().material;
+                        foreach (MeshRenderer mes in transform.GetComponentsInChildren<MeshRenderer>())
+                        {
+                            mes.material = material;
+                        }
+                    }
+                    else
+                    {
+                        foreach (MeshRenderer mes in transform.GetComponentsInChildren<MeshRenderer>())
+                        {
+                            mes.material = null;
+                        }
+                    }
+                }
 
                 OnPlace?.Invoke(this, System.EventArgs.Empty);
                 enabled = false;
@@ -72,5 +98,18 @@ public class Placement : MonoBehaviour
         {
             placementIndicator.SetActive(false);
         }
+    }
+
+    private GameObject GetGamePlanePrefab()
+    {
+        if (!PlayerPrefs.HasKey("shadows"))
+        {
+            return planeWithShadows;
+        }
+        if (PlayerPrefs.GetInt("shadows") == 1)
+        {
+            return planeWithShadows;
+        }
+        return null;
     }
 }

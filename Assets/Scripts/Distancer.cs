@@ -11,7 +11,6 @@ public class Distancer : MonoBehaviour
         cam = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
         distanceText.text = Vector3.Distance(transform.position, cam.transform.position).ToString("0.00") + " m";

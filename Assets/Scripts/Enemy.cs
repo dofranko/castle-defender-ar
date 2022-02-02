@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
     {
         OnDie?.Invoke(this, new EnemyDieEventArgs() { Money = this.money });
         Destroy(gameObject);
-        //TODO on die give money
+
     }
     public void TakeDamage(int damage)
     {

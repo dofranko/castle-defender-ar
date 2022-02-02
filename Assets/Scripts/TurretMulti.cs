@@ -31,7 +31,6 @@ public class TurretMulti : UpgradableTurret
             }
         }
     }
-    // Update is called once per frame
     void Update()
     {
         if (targets.Count == 0) return;

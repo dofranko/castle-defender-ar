@@ -25,7 +25,7 @@ namespace SwordWorld
         public float jumpHeight = 5.0f;
         public float jumpCooldown = 1.0f;
         private bool isJump;
-        
+
         void Awake()
         {
             // Set up references.
@@ -123,7 +123,6 @@ namespace SwordWorld
 
                 Quaternion newRotation = Quaternion.Slerp(GetComponent<Rigidbody>().rotation, targetRotation, turnSmoothing * Time.deltaTime);
 
-                // TODO：不知为毛，Rigid 的约束不起作用，只能手动设置为 0 
                 newRotation.x = 0f;
                 newRotation.z = 0f;
                 GetComponent<Rigidbody>().MoveRotation(newRotation);

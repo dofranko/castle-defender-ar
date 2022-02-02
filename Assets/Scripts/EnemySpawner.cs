@@ -116,7 +116,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnCastleSpawnEventHandler(object? sender, System.EventArgs e)
     {
-        if (state != State.InBetweenWaves) //TODO zrobić z tym porządek
+        if (state != State.InBetweenWaves)
             CloseShopsAndStartWave();
         (sender as Placement).OnCastleSpawn -= OnCastleSpawnEventHandler;
 
