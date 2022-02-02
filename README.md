@@ -13,5 +13,6 @@ The game is part of my Engineer's Thesis named: A mobile game with augmented rea
 ## Some photos:
 
 
+![obraz](https://user-images.githubusercontent.com/56605429/152194039-55b4c3f0-d4ac-4e03-b607-df3b8ec7e51d.png)
 
 ![obraz](https://user-images.githubusercontent.com/56605429/152191553-c56aab1b-7f33-4dd6-a728-05ea681cd638.png)
