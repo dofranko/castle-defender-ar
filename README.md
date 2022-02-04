@@ -16,7 +16,7 @@ The game uses markerless augmented reality to place and track placable objects l
 1. Use of depth sensor to enable objects occlusion (required compatible testing device equipped with that kind of sensor).
 2. Build for Apple devices.
 
-## Origin: 
+## Origin
 The game is part of my Engineer's Thesis named: A mobile game with augmented reality (_pl._ Gra mobilna z wykorzystaniem rozszerzonej rzeczywistości).
 
 ## Some photos (not newest build):
