@@ -7,6 +7,15 @@ The game uses markerless augmented reality to place and track placable objects l
 2. The game requires camera permission to work properly.
 3. Only way to download original game's apk is from this github's releases (you won't find it on neither Play Store nor Apple Store).
 
+## AR features
+### Implemented
+1. Detecting horizontal planes and anchoring objects.
+2. Detecting main directional light and ambient spherical harmonics of environment.
+
+### Yet to be implemented
+1. Use of depth sensor to enable objects occlusion (required compatible testing device equipped with that kind of sensor).
+2. Build for Apple devices.
+
 ## Origin: 
 The game is part of my Engineer's Thesis named: A mobile game with augmented reality (_pl._ Gra mobilna z wykorzystaniem rozszerzonej rzeczywistości).
 
