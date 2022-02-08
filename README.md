@@ -19,7 +19,7 @@ The game uses markerless augmented reality to place and track placable objects l
 ## Origin
 The game is part of my Engineer's Thesis named: A mobile game with augmented reality (_pl._ Gra mobilna z wykorzystaniem rozszerzonej rzeczywistości).
 
-## Video
+## Video (not newest build)
 
 https://user-images.githubusercontent.com/56605429/153029976-2d218cca-c971-4eee-be77-48f184df7d29.mp4
 
